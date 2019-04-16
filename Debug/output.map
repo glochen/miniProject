@@ -2726,6 +2726,101 @@ Discarded input sections
  .debug_frame   0x00000000       0xd0 Utilities/stm32f0_discovery.o
  .ARM.attributes
                 0x00000000       0x31 Utilities/stm32f0_discovery.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .group         0x00000000        0xc src/LCD.o
+ .text          0x00000000        0x0 src/LCD.o
+ .text.test_bothScroll
+                0x00000000       0x90 src/LCD.o
+ .text.test_bothBlink
+                0x00000000       0xb8 src/LCD.o
+ .text.test_bothStatic
+                0x00000000       0x64 src/LCD.o
+ .debug_macro   0x00000000      0xa60 src/LCD.o
+ .debug_macro   0x00000000       0x7b src/LCD.o
+ .debug_macro   0x00000000       0x34 src/LCD.o
+ .debug_macro   0x00000000       0x22 src/LCD.o
+ .debug_macro   0x00000000       0x87 src/LCD.o
+ .debug_macro   0x00000000       0x51 src/LCD.o
+ .debug_macro   0x00000000       0xef src/LCD.o
+ .debug_macro   0x00000000       0x6a src/LCD.o
+ .debug_macro   0x00000000      0x1df src/LCD.o
+ .debug_macro   0x00000000      0x249 src/LCD.o
+ .debug_macro   0x00000000     0x3334 src/LCD.o
+ .debug_macro   0x00000000      0x18b src/LCD.o
+ .debug_macro   0x00000000       0x28 src/LCD.o
+ .debug_macro   0x00000000       0xe7 src/LCD.o
+ .debug_macro   0x00000000       0x93 src/LCD.o
+ .debug_macro   0x00000000       0x70 src/LCD.o
+ .debug_macro   0x00000000      0x225 src/LCD.o
+ .debug_macro   0x00000000       0xb8 src/LCD.o
+ .debug_macro   0x00000000      0x16f src/LCD.o
+ .debug_macro   0x00000000      0x185 src/LCD.o
+ .debug_macro   0x00000000      0x123 src/LCD.o
+ .debug_macro   0x00000000      0x2a0 src/LCD.o
+ .debug_macro   0x00000000       0x70 src/LCD.o
+ .debug_macro   0x00000000       0xb2 src/LCD.o
+ .debug_macro   0x00000000      0x44c src/LCD.o
+ .debug_macro   0x00000000      0x46a src/LCD.o
+ .debug_macro   0x00000000      0x396 src/LCD.o
+ .debug_macro   0x00000000      0x750 src/LCD.o
+ .debug_macro   0x00000000      0x34d src/LCD.o
+ .debug_macro   0x00000000       0x34 src/LCD.o
+ .debug_macro   0x00000000       0x3a src/LCD.o
  .group         0x00000000        0xc src/main.o
  .group         0x00000000        0xc src/main.o
  .group         0x00000000        0xc src/main.o
@@ -2784,12 +2879,8 @@ Discarded input sections
  .group         0x00000000        0xc src/main.o
  .group         0x00000000        0xc src/main.o
  .text          0x00000000        0x0 src/main.o
- .text.test_bothScroll
-                0x00000000       0x90 src/main.o
- .text.test_bothBlink
-                0x00000000       0xb8 src/main.o
- .text.test_bothStatic
-                0x00000000       0x64 src/main.o
+ .data          0x00000000        0x0 src/main.o
+ .bss           0x00000000        0x0 src/main.o
  .debug_macro   0x00000000      0xa60 src/main.o
  .debug_macro   0x00000000       0x7b src/main.o
  .debug_macro   0x00000000       0x34 src/main.o
@@ -2821,6 +2912,32 @@ Discarded input sections
  .debug_macro   0x00000000      0x34d src/main.o
  .debug_macro   0x00000000       0x34 src/main.o
  .debug_macro   0x00000000       0x3a src/main.o
+ .debug_macro   0x00000000       0x64 src/main.o
+ .debug_macro   0x00000000       0x58 src/main.o
+ .debug_macro   0x00000000       0x17 src/main.o
+ .debug_macro   0x00000000       0x35 src/main.o
+ .debug_macro   0x00000000       0x9c src/main.o
+ .debug_macro   0x00000000       0x16 src/main.o
+ .debug_macro   0x00000000       0x97 src/main.o
+ .debug_macro   0x00000000      0x330 src/main.o
+ .debug_macro   0x00000000       0xfd src/main.o
+ .debug_macro   0x00000000       0x10 src/main.o
+ .debug_macro   0x00000000       0x58 src/main.o
+ .debug_macro   0x00000000       0x1f src/main.o
+ .debug_macro   0x00000000       0x43 src/main.o
+ .debug_macro   0x00000000       0x20 src/main.o
+ .debug_macro   0x00000000      0x18e src/main.o
+ .debug_macro   0x00000000       0x10 src/main.o
+ .debug_macro   0x00000000       0x1c src/main.o
+ .debug_macro   0x00000000       0x52 src/main.o
+ .debug_macro   0x00000000       0x40 src/main.o
+ .debug_macro   0x00000000       0x10 src/main.o
+ .debug_macro   0x00000000       0x40 src/main.o
+ .debug_macro   0x00000000       0xd7 src/main.o
+ .debug_macro   0x00000000       0x1c src/main.o
+ .debug_macro   0x00000000       0x3d src/main.o
+ .debug_macro   0x00000000       0x16 src/main.o
+ .debug_macro   0x00000000      0x16f src/main.o
  .group         0x00000000        0xc src/syscalls.o
  .group         0x00000000        0xc src/syscalls.o
  .group         0x00000000        0xc src/syscalls.o
@@ -3131,6 +3248,7 @@ LOAD StdPeriph_Driver/src/stm32f0xx_tim.o
 LOAD StdPeriph_Driver/src/stm32f0xx_usart.o
 LOAD StdPeriph_Driver/src/stm32f0xx_wwdg.o
 LOAD Utilities/stm32f0_discovery.o
+LOAD src/LCD.o
 LOAD src/main.o
 LOAD src/syscalls.o
 LOAD src/system_stm32f0xx.o
@@ -3158,30 +3276,30 @@ LOAD c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16
  *(.text)
  .text          0x080000c4       0x48 c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/crtbegin.o
  *(.text*)
- .text.main     0x0800010c       0x10 src/main.o
-                0x0800010c                main
- .text.welcome  0x0800011c       0x88 src/main.o
-                0x0800011c                welcome
+ .text.welcome  0x0800010c       0x88 src/LCD.o
+                0x0800010c                welcome
  .text.circdma_display1
-                0x080001a4       0x70 src/main.o
-                0x080001a4                circdma_display1
+                0x08000194       0x70 src/LCD.o
+                0x08000194                circdma_display1
  .text.circdma_display2
-                0x08000214       0x74 src/main.o
-                0x08000214                circdma_display2
+                0x08000204       0x74 src/LCD.o
+                0x08000204                circdma_display2
  .text.dma_spi_init_lcd
-                0x08000288      0x144 src/main.o
-                0x08000288                dma_spi_init_lcd
+                0x08000278      0x144 src/LCD.o
+                0x08000278                dma_spi_init_lcd
  .text.nano_wait
-                0x080003cc       0x18 src/main.o
-                0x080003cc                nano_wait
+                0x080003bc       0x18 src/LCD.o
+                0x080003bc                nano_wait
  .text.generic_lcd_startup
-                0x080003e4       0x50 src/main.o
-                0x080003e4                generic_lcd_startup
- .text.spi_cmd  0x08000434       0x34 src/main.o
-                0x08000434                spi_cmd
+                0x080003d4       0x50 src/LCD.o
+                0x080003d4                generic_lcd_startup
+ .text.spi_cmd  0x08000424       0x34 src/LCD.o
+                0x08000424                spi_cmd
  .text.spi_data
-                0x08000468       0x3c src/main.o
-                0x08000468                spi_data
+                0x08000458       0x3c src/LCD.o
+                0x08000458                spi_data
+ .text.main     0x08000494       0x10 src/main.o
+                0x08000494                main
  .text.SystemInit
                 0x080004a4       0x8c src/system_stm32f0xx.o
                 0x080004a4                SystemInit
@@ -3248,7 +3366,7 @@ LOAD c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16
                 0x080006c4       0xf4 c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-__atexit.o)
                 0x080006c4                __register_exitproc
  *(.rodata)
- .rodata        0x080007b8       0xd9 src/main.o
+ .rodata        0x080007b8       0xd9 src/LCD.o
  *(.rodata*)
  *fill*         0x08000891        0x3 
  .rodata._global_impure_ptr
@@ -3317,7 +3435,7 @@ LOAD c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sdata = .
  *(.data)
- .data          0x20000000       0x44 src/main.o
+ .data          0x20000000       0x44 src/LCD.o
                 0x20000000                dispmem
  *(.data*)
  *fill*         0x20000044        0x4 
@@ -3338,7 +3456,7 @@ LOAD c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16
                 0x20000474                __bss_start__ = _sbss
  *(.bss)
  .bss           0x20000474       0x1c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/crtbegin.o
- .bss           0x20000490       0x10 src/main.o
+ .bss           0x20000490       0x10 src/LCD.o
                 0x20000490                cmd
                 0x20000494                data
                 0x20000498                display1
@@ -3379,106 +3497,119 @@ LOAD c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16
  .ARM.attributes
                 0x0000001e       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/crtbegin.o
  .ARM.attributes
-                0x0000004a       0x31 src/main.o
+                0x0000004a       0x31 src/LCD.o
  .ARM.attributes
-                0x0000007b       0x31 src/system_stm32f0xx.o
+                0x0000007b       0x31 src/main.o
  .ARM.attributes
-                0x000000ac       0x21 startup/startup_stm32f0xx.o
+                0x000000ac       0x31 src/system_stm32f0xx.o
  .ARM.attributes
-                0x000000cd       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-impure.o)
+                0x000000dd       0x21 startup/startup_stm32f0xx.o
  .ARM.attributes
-                0x000000f9       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-init.o)
+                0x000000fe       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-impure.o)
  .ARM.attributes
-                0x00000125       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-__call_atexit.o)
+                0x0000012a       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-init.o)
  .ARM.attributes
-                0x00000151       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-atexit.o)
+                0x00000156       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-__call_atexit.o)
  .ARM.attributes
-                0x0000017d       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-fini.o)
+                0x00000182       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-atexit.o)
  .ARM.attributes
-                0x000001a9       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-lock.o)
+                0x000001ae       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-fini.o)
  .ARM.attributes
-                0x000001d5       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-__atexit.o)
+                0x000001da       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-lock.o)
  .ARM.attributes
-                0x00000201       0x1e c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/crtn.o
+                0x00000206       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-__atexit.o)
+ .ARM.attributes
+                0x00000232       0x1e c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/crtn.o
 OUTPUT(miniProject.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x1104
- .debug_info    0x00000000      0xe0d src/main.o
- .debug_info    0x00000e0d      0x2d5 src/system_stm32f0xx.o
- .debug_info    0x000010e2       0x22 startup/startup_stm32f0xx.o
+.debug_info     0x00000000     0x19c8
+ .debug_info    0x00000000      0xdf4 src/LCD.o
+ .debug_info    0x00000df4      0x8dd src/main.o
+ .debug_info    0x000016d1      0x2d5 src/system_stm32f0xx.o
+ .debug_info    0x000019a6       0x22 startup/startup_stm32f0xx.o
 
-.debug_abbrev   0x00000000      0x3b2
- .debug_abbrev  0x00000000      0x268 src/main.o
- .debug_abbrev  0x00000268      0x138 src/system_stm32f0xx.o
- .debug_abbrev  0x000003a0       0x12 startup/startup_stm32f0xx.o
+.debug_abbrev   0x00000000      0x572
+ .debug_abbrev  0x00000000      0x266 src/LCD.o
+ .debug_abbrev  0x00000266      0x1c2 src/main.o
+ .debug_abbrev  0x00000428      0x138 src/system_stm32f0xx.o
+ .debug_abbrev  0x00000560       0x12 startup/startup_stm32f0xx.o
 
-.debug_aranges  0x00000000       0xd0
+.debug_aranges  0x00000000       0xe8
  .debug_aranges
-                0x00000000       0x78 src/main.o
+                0x00000000       0x70 src/LCD.o
  .debug_aranges
-                0x00000078       0x30 src/system_stm32f0xx.o
+                0x00000070       0x20 src/main.o
  .debug_aranges
-                0x000000a8       0x28 startup/startup_stm32f0xx.o
+                0x00000090       0x30 src/system_stm32f0xx.o
+ .debug_aranges
+                0x000000c0       0x28 startup/startup_stm32f0xx.o
 
-.debug_ranges   0x00000000       0xa8
- .debug_ranges  0x00000000       0x68 src/main.o
- .debug_ranges  0x00000068       0x20 src/system_stm32f0xx.o
- .debug_ranges  0x00000088       0x20 startup/startup_stm32f0xx.o
+.debug_ranges   0x00000000       0xb0
+ .debug_ranges  0x00000000       0x60 src/LCD.o
+ .debug_ranges  0x00000060       0x10 src/main.o
+ .debug_ranges  0x00000070       0x20 src/system_stm32f0xx.o
+ .debug_ranges  0x00000090       0x20 startup/startup_stm32f0xx.o
 
-.debug_macro    0x00000000     0x10ff
- .debug_macro   0x00000000      0x2d2 src/main.o
- .debug_macro   0x000002d2       0x64 src/main.o
- .debug_macro   0x00000336       0x58 src/main.o
- .debug_macro   0x0000038e       0x17 src/main.o
- .debug_macro   0x000003a5       0x35 src/main.o
- .debug_macro   0x000003da       0x9c src/main.o
- .debug_macro   0x00000476       0x16 src/main.o
- .debug_macro   0x0000048c       0x97 src/main.o
- .debug_macro   0x00000523      0x330 src/main.o
- .debug_macro   0x00000853       0xfd src/main.o
- .debug_macro   0x00000950       0x10 src/main.o
- .debug_macro   0x00000960       0x58 src/main.o
- .debug_macro   0x000009b8       0x1f src/main.o
- .debug_macro   0x000009d7       0x43 src/main.o
- .debug_macro   0x00000a1a       0x20 src/main.o
- .debug_macro   0x00000a3a      0x18e src/main.o
- .debug_macro   0x00000bc8       0x10 src/main.o
- .debug_macro   0x00000bd8       0x1c src/main.o
- .debug_macro   0x00000bf4       0x52 src/main.o
- .debug_macro   0x00000c46       0x40 src/main.o
- .debug_macro   0x00000c86       0x10 src/main.o
- .debug_macro   0x00000c96       0x40 src/main.o
- .debug_macro   0x00000cd6       0xd7 src/main.o
- .debug_macro   0x00000dad       0x1c src/main.o
- .debug_macro   0x00000dc9       0x3d src/main.o
- .debug_macro   0x00000e06       0x16 src/main.o
- .debug_macro   0x00000e1c      0x16f src/main.o
- .debug_macro   0x00000f8b      0x174 src/system_stm32f0xx.o
+.debug_macro    0x00000000     0x13d1
+ .debug_macro   0x00000000      0x2d2 src/LCD.o
+ .debug_macro   0x000002d2       0x64 src/LCD.o
+ .debug_macro   0x00000336       0x58 src/LCD.o
+ .debug_macro   0x0000038e       0x17 src/LCD.o
+ .debug_macro   0x000003a5       0x35 src/LCD.o
+ .debug_macro   0x000003da       0x9c src/LCD.o
+ .debug_macro   0x00000476       0x16 src/LCD.o
+ .debug_macro   0x0000048c       0x97 src/LCD.o
+ .debug_macro   0x00000523      0x330 src/LCD.o
+ .debug_macro   0x00000853       0xfd src/LCD.o
+ .debug_macro   0x00000950       0x10 src/LCD.o
+ .debug_macro   0x00000960       0x58 src/LCD.o
+ .debug_macro   0x000009b8       0x1f src/LCD.o
+ .debug_macro   0x000009d7       0x43 src/LCD.o
+ .debug_macro   0x00000a1a       0x20 src/LCD.o
+ .debug_macro   0x00000a3a      0x18e src/LCD.o
+ .debug_macro   0x00000bc8       0x10 src/LCD.o
+ .debug_macro   0x00000bd8       0x1c src/LCD.o
+ .debug_macro   0x00000bf4       0x52 src/LCD.o
+ .debug_macro   0x00000c46       0x40 src/LCD.o
+ .debug_macro   0x00000c86       0x10 src/LCD.o
+ .debug_macro   0x00000c96       0x40 src/LCD.o
+ .debug_macro   0x00000cd6       0xd7 src/LCD.o
+ .debug_macro   0x00000dad       0x1c src/LCD.o
+ .debug_macro   0x00000dc9       0x3d src/LCD.o
+ .debug_macro   0x00000e06       0x16 src/LCD.o
+ .debug_macro   0x00000e1c      0x16f src/LCD.o
+ .debug_macro   0x00000f8b      0x2d2 src/main.o
+ .debug_macro   0x0000125d      0x174 src/system_stm32f0xx.o
 
-.debug_line     0x00000000      0xe58
- .debug_line    0x00000000      0x81b src/main.o
- .debug_line    0x0000081b      0x5bc src/system_stm32f0xx.o
- .debug_line    0x00000dd7       0x81 startup/startup_stm32f0xx.o
+.debug_line     0x00000000     0x1505
+ .debug_line    0x00000000      0x808 src/LCD.o
+ .debug_line    0x00000808      0x6c0 src/main.o
+ .debug_line    0x00000ec8      0x5bc src/system_stm32f0xx.o
+ .debug_line    0x00001484       0x81 startup/startup_stm32f0xx.o
 
-.debug_str      0x00000000    0x30090
- .debug_str     0x00000000    0x2ff96 src/main.o
-                              0x301f9 (size before relaxing)
- .debug_str     0x0002ff96       0xcc src/system_stm32f0xx.o
+.debug_str      0x00000000    0x3009d
+ .debug_str     0x00000000    0x2ff90 src/LCD.o
+                              0x301f3 (size before relaxing)
+ .debug_str     0x0002ff90       0x13 src/main.o
+                              0x2fff3 (size before relaxing)
+ .debug_str     0x0002ffa3       0xcc src/system_stm32f0xx.o
                               0x2bcfd (size before relaxing)
- .debug_str     0x00030062       0x2e startup/startup_stm32f0xx.o
+ .debug_str     0x0003006f       0x2e startup/startup_stm32f0xx.o
                                  0x59 (size before relaxing)
 
 .comment        0x00000000       0x7e
- .comment       0x00000000       0x7e src/main.o
+ .comment       0x00000000       0x7e src/LCD.o
                                  0x7f (size before relaxing)
+ .comment       0x0000007e       0x7f src/main.o
  .comment       0x0000007e       0x7f src/system_stm32f0xx.o
 
-.debug_frame    0x00000000      0x3ac
- .debug_frame   0x00000000      0x180 src/main.o
- .debug_frame   0x00000180       0x6c src/system_stm32f0xx.o
- .debug_frame   0x000001ec       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-init.o)
- .debug_frame   0x00000218       0x54 c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-__call_atexit.o)
- .debug_frame   0x0000026c       0x28 c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-atexit.o)
- .debug_frame   0x00000294       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-fini.o)
- .debug_frame   0x000002c0       0xb0 c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-lock.o)
- .debug_frame   0x00000370       0x3c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-__atexit.o)
+.debug_frame    0x00000000      0x3bc
+ .debug_frame   0x00000000      0x164 src/LCD.o
+ .debug_frame   0x00000164       0x2c src/main.o
+ .debug_frame   0x00000190       0x6c src/system_stm32f0xx.o
+ .debug_frame   0x000001fc       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-init.o)
+ .debug_frame   0x00000228       0x54 c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x0000027c       0x28 c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-atexit.o)
+ .debug_frame   0x000002a4       0x2c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-fini.o)
+ .debug_frame   0x000002d0       0xb0 c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-lock.o)
+ .debug_frame   0x00000380       0x3c c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc.a(lib_a-__atexit.o)
