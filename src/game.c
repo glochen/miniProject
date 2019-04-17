@@ -36,6 +36,14 @@ void updateSlots(){
             elevate(i);
         }
     }
+    findOptimal()
+}
+
+bool remove(int source, int dest){
+    int removed = slots[source].neighbors[dest];
+    slots[removed].state = Open;
+    // todo implement error check here
+    return true;
 }
 
 bool jump(int source, int dest){
@@ -43,11 +51,11 @@ bool jump(int source, int dest){
     if (source < 0 || dest < 0 || source >= NUM_SLOTS || dest >= NUM_SLOTS){
         return false; 
     }
-    // todo change this to use ActiveSlot states
-    if (slots[source].neighbours[dest] && slots[dest].state >= Legal){
+    if (slots[dest].state >= Legal){
         remove(source, dest);
         slots[source].state = Open;
         slots[dest].state = Peg;
+        ActiveSlot = -1;
         return true;
     }
     else{
