@@ -12,11 +12,7 @@ void init_lcd1(void);
 void display1_line1(const char *);
 void display1_line2(const char *);
 
-void test1(void);
-void test2(int peg);
-void test3(int spot);
-void test4();
-void test5(int score);
+void timer(void);
 
 uint16_t dispmem1[34] = {
         0x080 + 0,
@@ -27,70 +23,56 @@ uint16_t dispmem1[34] = {
         0x220, 0x220, 0x220, 0x220, 0x220, 0x220, 0x220, 0x220,
 };
 
-void test1(){
+void timer(void) {
+    // Initialize the display.
+
     init_lcd1();
-    display1_line1("Welcome!");
-    const char *msg2 = "                Created by Team 24               ";
-    int offset = 0;
-    while(1) {
-        display1_line2(&msg2[offset]);
-        nano_wait(100000000);
-        offset += 1;
-        if (offset == 32)
-            offset = 0;
+    // Initialize timer 2.
+    init_tim2();
+    for(;;)
+        asm("wfi");
+}
+
+void init_tim2(void) {
+    // Enable sys clock for timer 2
+    RCC -> APB1ENR |= RCC_APB1ENR_TIM2EN;
+    // Prescaler 48MHz (48MHz/1)
+    TIM2 -> PSC = 1 - 1;
+    // Auto-reload 480000
+    TIM2 -> ARR = 480000 - 1;
+    TIM2 -> DIER |= TIM_DIER_UIE;
+    NVIC -> ISER[0] = 1<<TIM2_IRQn;
+    TIM2 -> CR1 |= TIM_CR1_CEN;
+}
+
+void TIM2_IRQHandler()
+{
+    TIM2 -> SR &= ~(1);
+    clock();
+}
+
+void clock(void) {
+    static int tenths = 0;
+    static int seconds = 0;
+    static int minutes = 0;
+    static int hours = 0;
+    tenths += 1;
+    if (tenths == 10) {
+        tenths = 0;
+        seconds += 1;
     }
-}
-
-void test2(int peg){
-    init_lcd1();
+    if (seconds > 59) {
+        seconds = 0;
+        minutes += 1;
+    }
+    if (minutes > 59) {
+        minutes = 0;
+        hours += 1;
+    }
+    display1_line1("Time:");
     char line[20];
-    sprintf(line, "Selected peg %d", peg);
-    display1_line1(line);
-    display1_line2("");
-}
-
-void test3(int spot){
-    init_lcd1();
-    char line[20];
-    sprintf(line, "Move to spot %d", spot);
+    sprintf(line, "%02d:%02d:%02d.%d", hours, minutes, seconds, tenths);
     display1_line2(line);
-}
-
-void test4(){
-    init_lcd1();
-    int offset = 0;
-    while(1) {
-        if ((offset / 2) & 1){
-            display1_line2("INVALID SPOT");
-            nano_wait(1000000000);
-        }
-        else{
-            display1_line2("");
-            nano_wait(100000000);
-        }
-        offset += 1;
-        if (offset == 32)
-            offset = 0;
-    }
-}
-
-void test5(int score){
-    init_lcd1();
-    char line[20];
-    sprintf(line, "Pegs left: %d", score);
-    display1_line1(line);
-    const char *msg2;
-    if(score == 0){ msg2 = "                CONGRATS YOU WON              "; }
-    else if(score == 1 || score == 2){ msg2 = "                You're almost there         ";}
-    else{ msg2 = "                Better luck next time...         "; }
-    int offset = 0;
-    while(1) {
-        display1_line2(&msg2[offset]);
-        nano_wait(100000000);
-        offset += 1;
-        if (offset == 32)
-            offset = 0;
-    }
 }
 
 void display1_line1(const char *s) {
@@ -145,12 +127,12 @@ void init_lcd1(void) {
     //DMA
     RCC -> AHBENR |= RCC_AHBENR_DMA1EN;
     SPI1 -> CR2 =  SPI_CR2_TXDMAEN | SPI_CR2_SSOE| SPI_CR2_FRXTH | SPI_CR2_NSSP | SPI_CR2_DS_3 | SPI_CR2_DS_0;
-    DMA1_Channel5 -> CPAR = (uint32_t)(&(SPI1 -> DR));
-    DMA1_Channel5 -> CMAR = (uint32_t)(dispmem1);
-    DMA1_Channel5 -> CNDTR = 34;
-    DMA1_Channel5 -> CCR |= DMA_CCR_MINC | DMA_CCR_MSIZE_0 | DMA_CCR_PSIZE_0 | DMA_CCR_DIR | DMA_CCR_CIRC | DMA_CCR_TEIE;
-    DMA1_Channel5 -> CCR &= (~DMA_CCR_PL);
-    DMA1_Channel5 -> CCR |= DMA_CCR_EN;
+    DMA1_Channel3 -> CPAR = (uint32_t)(&(SPI1 -> DR));
+    DMA1_Channel3 -> CMAR = (uint32_t)(dispmem1);
+    DMA1_Channel3 -> CNDTR = 34;
+    DMA1_Channel3 -> CCR |= DMA_CCR_MINC | DMA_CCR_MSIZE_0 | DMA_CCR_PSIZE_0 | DMA_CCR_DIR | DMA_CCR_CIRC | DMA_CCR_TEIE;
+    DMA1_Channel3 -> CCR &= (~DMA_CCR_PL);
+    DMA1_Channel3 -> CCR |= DMA_CCR_EN;
 }
 
 void spi1_cmd(char b) {
