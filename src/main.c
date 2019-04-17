@@ -17,9 +17,10 @@
 
 int main(void)
 {
-    welcome();
-    //test_bothScroll();
-    //test_bothBlink();
-    //test_bothStatic();
+    //welcome();
+    //selectPeg(1);
+    //invalidSpot();
+    //selectSpot(15);
+    end(3);
 }
 

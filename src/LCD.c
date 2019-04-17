@@ -23,9 +23,10 @@ void generic_lcd_startup(void);
 void nano_wait(unsigned int n);
 
 void welcome(void);
-void test_bothScroll(void);
-void test_bothBlink(void);
-void test_bothStatic(void);
+void selectPeg(int peg);
+void selectSpot(int spot);
+void invalidSpot();
+void end(int score);
 
 uint16_t dispmem[34] = {
         0x080 + 0,
@@ -53,26 +54,30 @@ void welcome(){
     }
 }
 
-void test_bothScroll(){
+void selectPeg(int peg){
     cmd = spi_cmd;
     data = spi_data;
     display1 = circdma_display1;
     display2 = circdma_display2;
     dma_spi_init_lcd();
-    const char *msg1 = "                test moving1...               ";
-    const char *msg2 = "                test moving2...               ";
-    int offset = 0;
-    while(1) {
-        display1(&msg1[offset]);
-        display2(&msg2[offset]);
-        nano_wait(100000000);
-        offset += 1;
-        if (offset == 32)
-            offset = 0;
-    }
+    char line[20];
+    sprintf(line, "Selected peg %d", peg);
+    display1(line);
+    display2("");
 }
 
-void test_bothBlink(){
+void selectSpot(int spot){
+    cmd = spi_cmd;
+    data = spi_data;
+    display1 = circdma_display1;
+    display2 = circdma_display2;
+    dma_spi_init_lcd();
+    char line[20];
+    sprintf(line, "Move to spot %d", spot);
+    display2(line);
+}
+
+void invalidSpot(){
     cmd = spi_cmd;
     data = spi_data;
     display1 = circdma_display1;
@@ -81,12 +86,10 @@ void test_bothBlink(){
     int offset = 0;
     while(1) {
         if ((offset / 2) & 1){
-            display1("test blink1");
-            display2("test blink2");
+            display2("INVALID SPOT");
             nano_wait(1000000000);
         }
         else{
-            display1("");
             display2("");
             nano_wait(100000000);
         }
@@ -96,14 +99,27 @@ void test_bothBlink(){
     }
 }
 
-void test_bothStatic(){
+void end(int score){
     cmd = spi_cmd;
     data = spi_data;
     display1 = circdma_display1;
     display2 = circdma_display2;
     dma_spi_init_lcd();
-    display1("test static1");
-    display2("test static2");
+    char line[20];
+    sprintf(line, "Pegs left: %d", score);
+    display1(line);
+    const char *msg2;
+    if(score == 0){ msg2 = "                CONGRATS YOU WON              "; }
+    else if(score == 1 || score == 2){ msg2 = "                You're almost there         ";}
+    else{ msg2 = "                Better luck next time...         "; }
+    int offset = 0;
+    while(1) {
+        display2(&msg2[offset]);
+        nano_wait(100000000);
+        offset += 1;
+        if (offset == 32)
+            offset = 0;
+    }
 }
 
 void circdma_display1(const char *s) {
