@@ -14,13 +14,23 @@
 #include <stdint.h>
 #include <stdio.h>
 
+void nano_wait(unsigned int n);
 
 int main(void)
 {
-    //welcome();
+    //LCD 1
+    test2(3);
+
+    //LCD 2
+    welcome();
     //selectPeg(1);
     //invalidSpot();
     //selectSpot(15);
-    end(3);
+    //end(3);
 }
 
+void nano_wait(unsigned int n) {
+    asm(    "        mov r0,%0\n"
+            "repeat: sub r0,#83\n"
+            "        bgt repeat\n" : : "r"(n) : "r0", "cc");
+}

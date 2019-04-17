@@ -1,4 +1,4 @@
-src/LCD.o: ../src/LCD.c \
+src/LCD1.o: ../src/LCD1.c \
  C:/Users/gloch/workspace/miniProject/CMSIS/device/stm32f0xx.h \
  C:/Users/gloch/workspace/miniProject/CMSIS/core/core_cm0.h \
  C:/Users/gloch/workspace/miniProject/CMSIS/core/core_cmInstr.h \

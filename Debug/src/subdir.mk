@@ -4,19 +4,22 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/LCD.c \
+../src/LCD1.c \
+../src/LCD2.c \
 ../src/main.c \
 ../src/syscalls.c \
 ../src/system_stm32f0xx.c 
 
 OBJS += \
-./src/LCD.o \
+./src/LCD1.o \
+./src/LCD2.o \
 ./src/main.o \
 ./src/syscalls.o \
 ./src/system_stm32f0xx.o 
 
 C_DEPS += \
-./src/LCD.d \
+./src/LCD1.d \
+./src/LCD2.d \
 ./src/main.d \
 ./src/syscalls.d \
 ./src/system_stm32f0xx.d 
