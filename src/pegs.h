@@ -14,7 +14,10 @@ typedef struct _Slot{
     enum SlotState state;   // The state of the slot
 }
 
-bool jump(int source, int dest); // return if move is legal
+void initSlots();
+void resetBoard();
+
+bool jump(int dest); // return if move is legal
 bool remove(int source, int dest); // return if move is legal
 
 void updateSlots(); // update state of all slots per currently selected active peg
@@ -25,3 +28,6 @@ void descend(int slot); // changes a slot down to Open if it is Legal or higher
 void elevate(int slot); // changes a slot up to Legal if it is Open or Optimal
 
 void findOptimal(); // sets the optimal move for the current active
+
+bool pinSelect(int slot); // figures out what to do based on what pin is pushed
+

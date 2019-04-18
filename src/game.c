@@ -29,11 +29,18 @@ void elevate(int slot){
 void updateSlots(){
     for(int i = 0; i < NUM_SLOTS; i++){
         // Check the neighbor status of each slot
-        if(slots[ActiveSlot].neighbours[i] < 0){
+
+        // if not a neighbor, descend to open
+        if(slots[ActiveSlot].neighbors[i] < 0){
             descend(i);
         }
-        else{
+        // if a neighbor and between slot has peg, elevate to legal
+        else if(slots[slots[ActiveSlot].neighbors[i]].state == Peg){
             elevate(i);
+        }
+        // if a nieghbor, but between slot is empty, descend to Open
+        else{
+            descend(i);
         }
     }
     findOptimal()
@@ -46,19 +53,51 @@ bool remove(int source, int dest){
     return true;
 }
 
-bool jump(int source, int dest){
+bool jump(int dest){
     // If slot numbers are not in the correct range, return failure
-    if (source < 0 || dest < 0 || source >= NUM_SLOTS || dest >= NUM_SLOTS){
+    if (dest < 0 || dest >= NUM_SLOTS){
         return false; 
     }
     if (slots[dest].state >= Legal){
-        remove(source, dest);
-        slots[source].state = Open;
+        remove(ActiveSlot, dest);
+        slots[ActiveSlot].state = Open;
         slots[dest].state = Peg;
         ActiveSlot = -1;
         return true;
     }
     else{
-        return False;
+        return false;
+    }
+}
+
+bool slotSelect(int slot){
+    // Check that the int passed is in the valid range
+    if(slot < 0 || slot > NUM_SLOTS){
+        // todo print error message to lcd
+        return false;
+    }
+    // if no active peg
+    if(activeSlot < 0){
+        // Check that there is a peg in that slot
+        if(slots[slot].state != SlotSate.Peg){
+            // todo print error message to lcd (no peg in slot)
+            return false;
+        }
+        // select slot as active peg
+        activeSlot = slot;
+        updateSlots();
+        return true;
+    }
+    // if active peg
+    else{
+        // check that the slot is a legal jump location
+        if(slots[slot].state < SlotState.Legal){
+            // todo print error message (illegal jump location)
+            return false;
+        }
+        else{
+            jump(slot);
+            return true;
+        }
     }
 }
