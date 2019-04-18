@@ -18,15 +18,14 @@ void nano_wait(unsigned int n);
 
 int main(void)
 {
-    //test LED
-    //testLED();
-    //testButton();
+    testLED();
+    testButton();
 
     //LCD 1
-    timer();
+    //timer();
 
     //LCD 2
-    welcome();
+    //welcome();
     //selectPeg(1);
     //invalidSpot();
     //selectSpot(15);

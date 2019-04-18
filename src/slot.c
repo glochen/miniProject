@@ -9,15 +9,19 @@ void setup_pwm();
 void setup_gpio();
 void changeLED(int r, int g);
 void setup_button();
+void setup_timer3();
+
+uint8_t pressed = 0;
 
 void testLED(){
     setup_gpio();
     setup_pwm();
-    changeLED(20, 20);
+    changeLED(0, 20);
 }
 
 void testButton(){
     setup_button();
+    setup_timer3();
 }
 
 void setup_pwm() {
@@ -81,11 +85,14 @@ void setup_timer3() {
 void TIM3_IRQHandler()
 {
     TIM3 -> SR &= ~(1);
-    if((GPIOB -> IDR >> 13 & 1) != 0){
-        if(TIM1 -> CCR2 == 0){
-            changeLED(20, 20);
+    int curr = GPIOB -> IDR >> 13 & 1;
+    pressed <<= 1;
+    pressed |= curr;
+    if(pressed == 0b11000000){
+        if(TIM1 -> CCR2 == 20){
+            changeLED(20,0);
         }else{
-            changeLED(0, 0);
+            changeLED(0,20);
         }
     }
 }
