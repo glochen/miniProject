@@ -3,6 +3,7 @@
 #define NUM_SLOTS 15
 
 enum SlotState{Peg=0, Open=1, Legal=2, Optimal=3};
+enum SlotColor{Black=0, Red=1, Green=2, Yellow=3};
 enum GameMode{Hints=0,Regular=1,Timed=2};
 
 typedef struct _Slot{
