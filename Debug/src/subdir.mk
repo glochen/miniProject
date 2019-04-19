@@ -6,7 +6,9 @@
 C_SRCS += \
 ../src/LCD1.c \
 ../src/LCD2.c \
+../src/adc.c \
 ../src/main.c \
+../src/shiftRegister.c \
 ../src/slot.c \
 ../src/syscalls.c \
 ../src/system_stm32f0xx.c 
@@ -14,7 +16,9 @@ C_SRCS += \
 OBJS += \
 ./src/LCD1.o \
 ./src/LCD2.o \
+./src/adc.o \
 ./src/main.o \
+./src/shiftRegister.o \
 ./src/slot.o \
 ./src/syscalls.o \
 ./src/system_stm32f0xx.o 
@@ -22,7 +26,9 @@ OBJS += \
 C_DEPS += \
 ./src/LCD1.d \
 ./src/LCD2.d \
+./src/adc.d \
 ./src/main.d \
+./src/shiftRegister.d \
 ./src/slot.d \
 ./src/syscalls.d \
 ./src/system_stm32f0xx.d 

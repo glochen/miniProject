@@ -17,6 +17,7 @@ void testLED(){
     setup_gpio();
     setup_pwm();
     changeLED(0, 20);
+    // green pa9, red pa10
 }
 
 void testButton(){
