@@ -3,17 +3,21 @@
 
 It's the pin jumping game from Cracker Barrel. Jump pins to remove them.
 
-What the things do:
+## LCD:
 
-LCD:
-Before game begins: Welcome screen, game mode select.
-In game: selected slot number, move-to slot number. Pins still remaining?
-End of game: Pins remaining. Call the player an idiot. Time spent? Perhaps high scores.
-Notes:
-LCD1 - Welcome, selected slot number, move-to slot number, pegs left at end of game, message
-LCD2 - Game selection mode, pins remaining during game, recommended slots, timer 
+|      |Before game | In game | After Game|
+| ---- | ----------- | ------- | --------- |
+| **LCD1** |Welcome screen | Selected slot #, move to slot number # | Call the player an idiot
+| **LCD2** |game mode select | Time and pins remaining (hint?)| time spent, pins remaining
 
 
-Slots:
-Color to indicate if a pin is there or slot is empty.
-When a slot with a pin is selected, change the color. The empty slots around it will also change color to indicate legal moves and recommended move.
+## LEDs
+|     | Red on | Red off|
+|-----| ----| ------|
+| Green on | Selected peg (yellow) | Legal move (green) |
+| Green off| Peg (red)  | Open (no light) |
+
+## Game/Hardware Interface
+
+Interrupt handler for button press should pass the number of the peg slot pressed to slotSelect(int).
+Numerous colors will call setColor(int, SlotColor), which will pass the number of the slot to change color and the color to change it to. See pegs.h for the SlotColor Enum.
