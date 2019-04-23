@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
+void testLEDs();
 void setup_timer3(void);
 void update_samples(int row);
 void update_button_press(void);
@@ -18,7 +19,6 @@ void setup_button_matrix(void);
 #define KEY_PRESS_MASK  0b11000111
 #define KEY_REL_MASK    0b11100011
 int col = 0;
-//int row = -1;
 int int_array[5][3] = { {1, 2, 3},
                          {4, 5, 6},
                          {7, 8, 9},
@@ -29,7 +29,14 @@ uint8_t key_samples[5][3]  = { {0}, {0}, {0}, {0}, {0} };
 uint8_t key_pressed[5][3]  = { {0}, {0}, {0}, {0}, {0} };
 uint8_t key_released[5][3]  = { {0}, {0}, {0}, {0}, {0} };
 
+void testLEDs(){
+    setup_shift();
+    int data[16] = {1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0};
+    sendData(data);
+}
+
 void testButtons(){
+    init_lcd2();
     setup_button_matrix();
     setup_timer3();
     while(1){
@@ -37,6 +44,29 @@ void testButtons(){
         if(slot != -1){
             selectPeg(slot);
         }
+    }
+}
+
+void setup_shift(){
+    RCC -> AHBENR |= RCC_AHBENR_GPIOCEN;
+    GPIOC -> MODER |= 1 << 0;
+    GPIOC -> MODER |= 1 << 2*1;
+    GPIOC -> MODER |= 1 << 2*2;
+}
+
+void sendData(int data[]){
+    for(int i = 0; i < 16; i++){
+        if(data[i] == 1){
+            GPIOC -> ODR |= 1 << 2;
+        }else{
+            GPIOC -> ODR &= ~(1 << 2);
+        }
+        GPIOC -> ODR |= 1;
+        GPIOC -> ODR &= ~(1 << 1);
+        nano_wait(200);
+        GPIOC -> ODR &= ~1;
+        GPIOC -> ODR |= 1 << 1;
+        nano_wait(200);
     }
 }
 

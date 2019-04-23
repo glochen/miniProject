@@ -18,9 +18,7 @@ void nano_wait(unsigned int n);
 
 int main(void)
 {
-    init_lcd2();
-    //testLED();
-    //testButton();
+    //testLEDs();
     testButtons();
     //testShift();
 
