@@ -61,16 +61,21 @@ def minimize(b, best, k):
         score = minimize(makemove(b,m), best, k-1)
         if score < best[1]:
             best = (m, score)
+    return best
+
+def optimize(b,k=14):
+    pass
+    
 
 def c(c):
-    if slots[c]:
+    if c:
         return 'X'
     else:
         return 'O'
 
 def showboard(b):
     print(f'    {c(b[0])}')
-    print(f'   {c(b[1])} {c(slots[2])}')
-    print(f'  {c(slots[3])} {c(slots[4])} {c(slots[5])}')
-    print(f' {c(slots[6])} {c(slots[7])} {c(slots[8])} {c(slots[9])}')
-    print(f'{c(slots[10])} {c(slots[11])} {c(slots[12])} {c(slots[13])} {c(slots[14])}')
+    print(f'   {c(b[1])} {c(b[2])}')
+    print(f'  {c(b[3])} {c(b[4])} {c(b[5])}')
+    print(f' {c(b[6])} {c(b[7])} {c(b[8])} {c(b[9])}')
+    print(f'{c(b[10])} {c(b[11])} {c(b[12])} {c(b[13])} {c(b[14])}')
