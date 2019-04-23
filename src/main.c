@@ -18,15 +18,16 @@ void nano_wait(unsigned int n);
 
 int main(void)
 {
+    init_lcd2();
     //testLED();
     //testButton();
-
+    testButtons();
     //testShift();
 
     //LCD 1
     //timer();
 
-    testADC();
+    //testADC();
 
     //LCD 2
     //welcome();

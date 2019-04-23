@@ -42,7 +42,6 @@ void welcome(){
 }
 
 void selectPeg(int peg){
-    init_lcd2();
     char line[20];
     sprintf(line, "Selected peg %d", peg);
     display2_line1(line);
@@ -50,7 +49,6 @@ void selectPeg(int peg){
 }
 
 void selectSpot(int spot){
-    init_lcd2();
     char line[20];
     sprintf(line, "Move to spot %d", spot);
     display2_line2(line);

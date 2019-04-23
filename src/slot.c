@@ -3,72 +3,73 @@
 #include <stdint.h>
 #include <stdio.h>
 
-void testLED();
-void testButton();
-void setup_pwm();
-void setup_gpio();
-void changeLED(int r, int g);
-void setup_button();
-void setup_timer3();
+void setup_timer3(void);
+void update_samples(int row);
+void update_button_press(void);
+int get_button_pressed(void);
+void setup_button_matrix(void);
 
-uint8_t pressed = 0;
+#define SAMPLE_TIME_MS 10
+#define SAMPLE_COUNT (SAMPLE_TIME_MS)
 
-void testLED(){
-    setup_gpio();
-    setup_pwm();
-    changeLED(0, 20);
-    // green pa9, red pa10
-}
+#define THRESHOLD_TIME_MS 2
+#define THRESHOLD (THRESHOLD_TIME_MS)
 
-void testButton(){
-    setup_button();
+#define KEY_PRESS_MASK  0b11000111
+#define KEY_REL_MASK    0b11100011
+int col = 0;
+//int row = -1;
+int int_array[5][3] = { {1, 2, 3},
+                         {4, 5, 6},
+                         {7, 8, 9},
+                         {10, 11, 12},
+                         {13, 14, 15} };
+
+uint8_t key_samples[5][3]  = { {0}, {0}, {0}, {0}, {0} };
+uint8_t key_pressed[5][3]  = { {0}, {0}, {0}, {0}, {0} };
+uint8_t key_released[5][3]  = { {0}, {0}, {0}, {0}, {0} };
+
+void testButtons(){
+    setup_button_matrix();
     setup_timer3();
+    while(1){
+        int slot = get_button_pressed();
+        if(slot != -1){
+            selectPeg(slot);
+        }
+    }
 }
 
-void setup_pwm() {
-    RCC -> APB2ENR |= RCC_APB2ENR_TIM1EN;
-    TIM1 -> BDTR |= 1 << 15;
-    TIM1 -> CR1 &= ~TIM_CR1_DIR;
-    TIM1 -> CR1 &= ~TIM_CR1_CMS;
-    TIM1 -> CCMR1 |= TIM_CCMR1_OC2PE;
-    TIM1 -> CCMR2 |= TIM_CCMR2_OC3PE;
-    TIM1 -> CCMR1 |= TIM_CCMR1_OC2M;
-    TIM1 -> CCMR2 |= TIM_CCMR2_OC3M;
-    TIM1 -> PSC = 480 - 1;
-    TIM1 -> ARR = 100 - 1;
-    TIM1 -> CCER |= TIM_CCER_CC2E;
-    TIM1 -> CCER |= TIM_CCER_CC3E;
-    TIM1 -> CR1 |= TIM_CR1_CEN;
-}
-
-void setup_gpio() {
-    // Enable Port A
+void setup_button_matrix() {
+    // Enable Port A & B
     RCC -> AHBENR |= RCC_AHBENR_GPIOAEN;
-
-    // Set the mode for PA9,10 for alt function
-    GPIOA -> MODER &= ~(3<<(2*9));
-    GPIOA -> MODER |= 2<<(2*9);
-
-    GPIOA -> MODER &= ~(3<<(2*10));
-    GPIOA -> MODER |= 2<<(2*10);
-
-    GPIOA -> AFR[1] &= ~(0xf<<(1*4));
-    GPIOA -> AFR[1] |= 0x2<<(1*4);
-
-    GPIOA -> AFR[1] &= ~(0xf<<(2*4));
-    GPIOA -> AFR[1] |= 0x2<<(2*4);
-}
-
-void setup_button(){
     RCC -> AHBENR |= RCC_AHBENR_GPIOBEN;
-    GPIOB -> MODER &= ~(3<<(2*13));
-    GPIOB -> PUPDR &= ~(3 << 2*13);
-    GPIOB -> PUPDR |= (2 << 2*13);
-}
 
-void changeLED(int r, int g){
-    TIM1 -> CCR2 = g;
-    TIM1 -> CCR3 = r;
+    // columns
+    GPIOA -> MODER &= ~(3 << 2*0);
+    GPIOA -> MODER |= (1 << 2*0);
+    GPIOA -> MODER &= ~(3 << 2*1);
+    GPIOA -> MODER |= (1 << 2*1);
+    GPIOA -> MODER &= ~(3 << 2*2);
+    GPIOA -> MODER |= (1 << 2*2);
+
+    // rows
+    GPIOB -> MODER &= ~(3 << 2*0);
+    GPIOB -> MODER &= ~(3 << 2*1);
+    GPIOB -> MODER &= ~(3 << 2*2);
+    GPIOB -> MODER &= ~(3 << 2*3);
+    GPIOB -> MODER &= ~(3 << 2*4);
+
+    GPIOB -> PUPDR &= ~(3 << 2*0);
+    GPIOB -> PUPDR |= (2 << 2*0);
+    GPIOB -> PUPDR &= ~(3 << 2*1);
+    GPIOB -> PUPDR |= (2 << 2*1);
+    GPIOB -> PUPDR &= ~(3 << 2*2);
+    GPIOB -> PUPDR |= (2 << 2*2);
+    GPIOB -> PUPDR &= ~(3 << 2*3);
+    GPIOB -> PUPDR |= (2 << 2*3);
+    GPIOB -> PUPDR &= ~(3 << 2*4);
+    GPIOB -> PUPDR |= (2 << 2*4);
 }
 
 void setup_timer3() {
@@ -83,17 +84,62 @@ void setup_timer3() {
     TIM3 -> CR1 |= TIM_CR1_CEN;
 }
 
-void TIM3_IRQHandler()
-{
-    TIM3 -> SR &= ~(1);
-    int curr = GPIOB -> IDR >> 13 & 1;
-    pressed <<= 1;
-    pressed |= curr;
-    if(pressed == 0b11000000){
-        if(TIM1 -> CCR2 == 20){
-            changeLED(20,0);
-        }else{
-            changeLED(0,20);
+void update_samples(int row) {
+    for(int i = 0; i < 5; i++) {
+        uint8_t curr_history = key_samples[i][col];
+        curr_history = curr_history << 1;
+
+        if(row == i)
+            curr_history |= 1;
+
+        key_samples[i][col] = curr_history;
+    }
+}
+
+void update_button_press() {
+    for(int i = 0; i < 5; i++) {
+        for(int j = 0; j < 3; j++) {
+            if ((key_samples[i][j] & KEY_PRESS_MASK) == 0b00000111) {
+                key_pressed[i][j] = 1;
+                key_samples[i][j] = 0xFF;
+            }
+
+            if ((key_samples[i][j] & KEY_REL_MASK) == 0b11100000) {
+                key_released[i][j] = 1;
+                key_samples[i][j] = 0x00;
+            }
         }
     }
+}
+
+int get_button_pressed() {
+    for(int i = 0; i < 5; i++) {
+        for(int j = 0; j < 3; j++) {
+            if(key_released[i][j] == 1 && key_pressed[i][j] == 1) {
+                key_released[i][j] = 0;
+                key_pressed[i][j] = 0;
+                return int_array[i][j];
+            }
+        }
+    }
+    return -1;
+}
+
+
+void TIM3_IRQHandler()
+{
+    int current_row = -1;
+    int input = (GPIOB -> IDR);
+    input &= 31;
+    if(input == 0b00001){ current_row = 0; }
+    else if(input == 0b00010){ current_row = 1; }
+    else if(input == 0b00100){ current_row = 2; }
+    else if(input == 0b01000){ current_row = 3; }
+    else if(input == 0b10000){ current_row = 4; }
+    update_samples(current_row);
+    update_button_press();
+    col++;
+    if(col > 2){ col = 0; }
+    GPIOA -> ODR = 1 << col;
+    TIM3 -> SR &= ~(1);
 }
