@@ -48,6 +48,13 @@ def makemove(b, m):
     b[m[1]] = True
     return b
 
+def unmove(b, m):
+    jumped = slots[m[0]][m[1]]
+    b[jumped] = True
+    b[m[0]] = True
+    b[m[1]] = False
+    return b
+
 def gameover(b):
     if moves(b) == []:
         return len([i for i in range(0, len(b)) if b[i]])
@@ -56,16 +63,26 @@ def gameover(b):
 
 def minimize(b, best, k):
     if gameover(b):
-        return gameover(b)
+        return (-1,-1),gameover(b)
     for m in moves(b):
         score = minimize(makemove(b,m), best, k-1)
-        if score < best[1]:
-            best = (m, score)
+        if score[1] < best[1]:
+            best = (m, score[1])
+        unmove(b, m)
+        if score[1] == 1:
+            return best
     return best
 
 def optimize(b,k=14):
-    pass
+    return minimize(b, ((-1,-1), 99), k)[0]
     
+def doOpt(b):
+    showboard(b)
+    m = optimize(b)
+    print(m)
+    b = makemove(b, m)
+    showboard(b)
+    print('~~~~~~~~~')
 
 def c(c):
     if c:
