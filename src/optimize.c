@@ -72,9 +72,35 @@ MoveList moves(bool* b){
     return ret;
 }
 
-void makemove(bool* b, Move m);
-void unmove(bool* b, Move m);
-int gameover(bool* b);
+void makemove(bool* b, Move m){
+    char jumped = jumps[m.src][m.dest];
+    b[(int)jumped] = false;
+    b[m.src] = false;
+    b[m.dest] = true;
+}
+void unmove(bool* b, Move m){
+    char jumped = jumps[m.src][m.dest];
+    b[(int)jumped] = true;
+    b[m.src] = true;
+    b[m.dest] = false;
+}
+    
+int gameover(bool* b){
+    MoveList tmp = moves(b);
+    if (tmp.numMoves == 0){
+        int count = 0;
+        for(int i = 0; i < 15; i++){
+            count += (int) b[i];
+        }
+        return count;
+    }
+    else{
+        return 0;
+    }
+}
+
+
+
 MoveValue minimize(bool* b, MoveValue best, int k);
 MoveValue optimize(bool* b, int k);
 float lookahead(bool* b, int k);
