@@ -3,7 +3,7 @@
 
 Slot slots[NUM_SLOTS];
 int ActiveSlot; // the currently selected slot
-
+int pegsRemaining = NUM_SLOTS;
 
 int min(int x, int y){
     if (x < y){
@@ -46,10 +46,18 @@ void updateSlots(){
     findOptimal()
 }
 
-bool remove(int source, int dest){
-    int removed = slots[source].neighbors[dest];
-    slots[removed].state = Open;
-    // todo implement error check here
+bool gameOver(){
+    // if there's only one pin left, the game must be over
+    if (pegsRemaining == 1){
+        return true;
+
+    for(int s = 0; s < NUM_SLOTS; s++){
+        // if any slot is a legal move, return false
+        if(slots[s].state >= Legal){
+            return false;
+        }
+    }
+    // otherwise, game over
     return true;
 }
 
@@ -60,9 +68,15 @@ bool jump(int dest){
     }
     if (slots[dest].state >= Legal){
         remove(ActiveSlot, dest);
+        // move peg to new slot
         slots[ActiveSlot].state = Open;
         slots[dest].state = Peg;
+        // remove jumped peg
+        slots[slots[ActiveSlot].neighbors[dest]].state = Open;
+        pegsRemaining -= 1;
+        // clear active slot
         ActiveSlot = -1;
+
         return true;
     }
     else{
