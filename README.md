@@ -8,9 +8,9 @@ It's the pin jumping game from Cracker Barrel. Jump pins to remove them.
 |      |Before game | In game | After Game|
 | ---- | ----------- | ------- | --------- |
 | **LCD2** | Team24!!!!! | Selected slot # | Call the player an idiot
-| |        | Turn dial to select game mode - Press button to continue | Hint | High Score (pins, time)
+|          | Turn dial to select game mode - Press button to continue | Hint | High Score (pins, time)
 | **LCD1** | Current selected game mode | Time spent/remaining| time spent/remaining 
-| |        | description of game mode   | Pins remaining | pins remaining
+|          | description of game mode   | Pins remaining | pins remaining
 
 ## LEDs
 |     | Red on | Red off|
