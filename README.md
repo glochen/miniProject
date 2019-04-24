@@ -19,20 +19,36 @@ It's the pin jumping game from Cracker Barrel. Jump pins to remove them.
 | Green off| Peg (red)  | Open (no light) |
 
 ## Game Modes
-Easy - hints
-Normal - no hints, no time limit
-Hard - time limit
+
+### Easy
+Hints available.
+### Normal
+No hints, no timer.
+### Hard
+No hints, time limit.
+
+
 
 ## Game/Hardware Interface
 
-Interrupt handler for button press should pass the number of the peg slot pressed to slotSelect(int).
-Numerous colors will call setColor(int, SlotColor), which will pass the number of the slot to change color and the color to change it to. See pegs.h for the SlotColor Enum.
+Press any button to begin game with selected game mode.
+After game, press any button to return to game select.
 
-LCD:
-
+### LCD
+Software call `void printLCD(int lcd, int line, char* msg, int len)`
+### Buttons
+Software call `int get_button_pressed()`. Software should call this in a loop while checking that the game is not otherwise ended.
+### Timer
+TIM2_IRQn at 1 Hz. IRQn increments a global variable for second counter. Then call `void updateClock()`. Software will determine call `printLCD()` to update time display. If in timed mode, will end game if ran out of time. If game is over due to winning or timer running out, software will call `endTimer()` which should disable the timer's interrupt.
+### LEDs
+Software call `void setLights(int* light)` - light is array of 15 ints. Lower 2 bits are the color. Bit 1 is green, bit 0 is red.
 
 ## Criteria for Success
-Criteria for success: Successfully have a working game with the LCD screen
-> displaying accurate results.
-Solver and hint system
-Stats, mode select, instructions
+### Minimally
+Play game. It works.
+
+### Better
+Display optimal move. (winning move)
+
+### Riiiiiiiiick
+Calculate percentages - winning outcomes for each move. Modulate this with k in the optimization routine? Doable.
