@@ -19,5 +19,10 @@ int main(){
 
     showboard(board);
 
+    MoveList m = moves(board);
+    for(int i = 0; i < m.numMoves; i++){
+        printf("(%d, %d)\n", m.moves[i].src, m.moves[i].dest);
+    }
+
     return 0;
 }

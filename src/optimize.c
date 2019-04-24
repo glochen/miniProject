@@ -61,7 +61,7 @@ MoveList moves(bool* b){
     for(int p = 0; p < 15; p++){ // for all slots with a peg
         if (!b[p]) continue;
         for(int n = 0; n < 15; n++){ // for all slots with no peg
-            if (!b[n]) continue;
+            if (b[n]) continue;
             if (jumps[p][n] != 63 && b[jumps[p][n]]){
                 ret.moves[ret.numMoves].src = p;
                 ret.moves[ret.numMoves].dest= n;
