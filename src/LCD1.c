@@ -23,13 +23,6 @@ uint16_t dispmem1[34] = {
         0x220, 0x220, 0x220, 0x220, 0x220, 0x220, 0x220, 0x220,
 };
 
-void selectMode(int mode){
-    init_lcd1();
-    display1_line1("GAME MODE:");
-    if(mode == 1){ display1_line2("DEFAULT"); }
-    if(mode == 2){ display1_line2("TIMED"); }
-}
-
 void timer(void) {
     init_lcd1();
     init_tim2();

@@ -3,19 +3,11 @@
 #include <stdint.h>
 #include <stdio.h>
 
-void testADC(void);
 void setup_adc();
 int read_adc_channel();
 void setup_timer15();
 
-int prevMode = -1;
-
-void testADC(void){
-    //PC3 ADCIN_13
-    setup_adc();
-    setup_timer15();
-
-}
+int mode = -1;
 
 void setup_adc() {
     RCC -> APB2ENR |= RCC_APB2ENR_ADC1EN; // Enable clock to ADC unit
@@ -38,13 +30,18 @@ int read_adc_channel() {
 void TIM15_IRQHandler() {
     TIM15 -> SR &= ~(1);
     int x = read_adc_channel();
-    if((x >= 1800 && prevMode == 1) || prevMode == -1){
-        selectMode(2);
-        prevMode = 2;
-    }
-    else if((x < 1800 && prevMode == 2) || prevMode == -1){
-        selectMode(1);
-        prevMode = 1;
+    if(x < 1300){
+        mode = 1;
+        display2_line1("GAMEMODE: Easy");
+        printLCD(2,2,"                 No time limit, hints, GOOD LUCK                  ", 50);
+    }else if(x < 2800){
+        mode = 2;
+        display2_line1("GAMEMODE: Normal");
+        printLCD(2,2,"                 No time limit, no hints, GOOD LUCK                  ", 50);
+    }else{
+        mode = 3;
+        display2_line1("GAMEMODE: Hard");
+        printLCD(2,2,"                 5 minutes, no hints, GOOD LUCK                  ", 50);
     }
 }
 
