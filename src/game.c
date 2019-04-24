@@ -2,7 +2,6 @@
 #include <stdio.h>
 
 Slot slots[NUM_SLOTS];
-int ActiveSlot; // the currently selected slot
 int pegsRemaining = NUM_SLOTS;
 
 int min(int x, int y){
@@ -67,7 +66,6 @@ bool jump(int dest){
         return false; 
     }
     if (slots[dest].state >= Legal){
-        remove(ActiveSlot, dest);
         // move peg to new slot
         slots[ActiveSlot].state = Open;
         slots[dest].state = Peg;
