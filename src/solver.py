@@ -61,7 +61,7 @@ def gameover(b):
     else:
         return False
 
-def minimize(b, best, k):
+def minimize(b, best=((-1,-1),99), k=1):
     if gameover(b):
         return (-1,-1),gameover(b)
     for m in moves(b):
@@ -75,7 +75,44 @@ def minimize(b, best, k):
 
 def optimize(b,k=14):
     return minimize(b, ((-1,-1), 99), k)[0]
-    
+
+def lookahead(b,k=1):
+    if gameover(b):
+        return int(gameover(b) == 1)
+    else:
+        total = 0
+        if k == 0:
+            for m in moves(b):
+                makemove(b, m)
+                val = minimize(b, ((-1,-1), 99), 14)[1]
+                unmove(b, m)
+                total += int(val == 1)
+        else:
+            for m in moves(b):
+                makemove(b, m)
+                val = lookahead(b, k-1)
+                unmove(b, m)
+                total += val
+        avg = total/len(moves(b))
+        if not isinstance(avg, float):
+            raise TypeError('avg in lookahead should be float')
+        return avg
+
+def lookaheadoptions(b, k=1):    
+    options = moves(b)
+    value = {}
+    for m in options:
+        makemove(b, m)
+        value[m] = lookahead(b, k-1)
+        unmove(b, m)
+    return value
+
+def showlookahead(b,k=1):
+    showboard(b)
+    for m,v in lookaheadoptions(b,k).items():
+        print(f'{m}\t {v:.2f}')
+    print('~~~~~~~~~~~~~')
+
 def doOpt(b):
     showboard(b)
     m = optimize(b)
