@@ -27,21 +27,25 @@ int read_adc_channel() {
     return ADC1 -> DR;
 }
 
+int getMode(){
+    return mode;
+}
+
 void TIM15_IRQHandler() {
     TIM15 -> SR &= ~(1);
     int x = read_adc_channel();
-    if(x < 1300){
+    if(x < 1000){
         mode = 1;
         display2_line1("GAMEMODE: Easy");
-        printLCD(2,2,"                 No time limit, hints, GOOD LUCK                  ", 50);
-    }else if(x < 2800){
+        display2_line2("Hints Enabled");
+    }else if(x < 3000){
         mode = 2;
         display2_line1("GAMEMODE: Normal");
-        printLCD(2,2,"                 No time limit, no hints, GOOD LUCK                  ", 50);
+        display2_line2("Hints Disabled");
     }else{
         mode = 3;
         display2_line1("GAMEMODE: Hard");
-        printLCD(2,2,"                 5 minutes, no hints, GOOD LUCK                  ", 50);
+        display2_line2("5 Min Limit");
     }
 }
 

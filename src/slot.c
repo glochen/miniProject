@@ -31,8 +31,8 @@ uint8_t key_released[5][3]  = { {0}, {0}, {0}, {0}, {0} };
 
 void testLEDs(){
     setup_shift();
-    int data[15] = {3,0,3,0,3,0,3,0,3,0,3,0,1,2,1};
-    sendData(data);
+    int data[15] = {0,0,1,1,1,1,1,1,2,3,3,3,3,3,3};
+    setLights(data);
 }
 
 void testButtons(){
@@ -60,9 +60,9 @@ void setup_shift(){
     GPIOC -> MODER |= 1 << 2*2;
 }
 
-void sendData(int data[]){
+void setLights(int * lights){
     for(int i = 0; i < 15; i++){
-        if(data[i] == 3){               // 1 1
+        if(lights[i] == 0){               // 1 1 (off)
             GPIOC -> ODR |= 1 << 2;     // send 1
             GPIOC -> ODR |= 1;
             GPIOC -> ODR &= ~(1 << 1);
@@ -71,7 +71,7 @@ void sendData(int data[]){
             GPIOC -> ODR |= 1 << 1;
             nano_wait(200);
             GPIOC -> ODR |= 1 << 2;     // send 1
-        }else if(data[i] == 2){         // 1 0
+        }else if(lights[i] == 1){         // 1 0 (green)
             GPIOC -> ODR |= 1 << 2;     // send 1
             GPIOC -> ODR |= 1;
             GPIOC -> ODR &= ~(1 << 1);
@@ -80,7 +80,7 @@ void sendData(int data[]){
             GPIOC -> ODR |= 1 << 1;
             nano_wait(200);
             GPIOC -> ODR &= ~(1 << 2);  // send 0
-        }else if(data[i] == 1){         // 0 1
+        }else if(lights[i] == 2){         // 0 1 (red)
             GPIOC -> ODR &= ~(1 << 2);  // send 0
             GPIOC -> ODR |= 1;
             GPIOC -> ODR &= ~(1 << 1);
@@ -89,7 +89,7 @@ void sendData(int data[]){
             GPIOC -> ODR |= 1 << 1;
             nano_wait(200);
             GPIOC -> ODR |= 1 << 2;     // send 1
-        }else{                          // 0 0
+        }else{                          // 0 0 (yellow)
             GPIOC -> ODR &= ~(1 << 2);  // send 0
             GPIOC -> ODR |= 1;
             GPIOC -> ODR &= ~(1 << 1);

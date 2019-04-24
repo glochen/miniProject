@@ -29,6 +29,8 @@ int main(void)
     testLEDs();
     //testButtons();
 
+    init_tim2();
+
     // static tests
     /*printLCD(1,1,"display1line1", 13);
     printLCD(1,2,"display1line2", 13);

@@ -12,8 +12,6 @@ void init_lcd1(void);
 void display1_line1(const char *);
 void display1_line2(const char *);
 
-void timer(void);
-
 uint16_t dispmem1[34] = {
         0x080 + 0,
         0x220, 0x220, 0x220, 0x220, 0x220, 0x220, 0x220, 0x220,
@@ -23,20 +21,13 @@ uint16_t dispmem1[34] = {
         0x220, 0x220, 0x220, 0x220, 0x220, 0x220, 0x220, 0x220,
 };
 
-void timer(void) {
-    init_lcd1();
-    init_tim2();
-    for(;;)
-        asm("wfi");
-}
-
 void init_tim2(void) {
     // Enable sys clock for timer 2
     RCC -> APB1ENR |= RCC_APB1ENR_TIM2EN;
     // Prescaler 48MHz (48MHz/1)
     TIM2 -> PSC = 1 - 1;
     // Auto-reload 480000
-    TIM2 -> ARR = 480000 - 1;
+    TIM2 -> ARR = 48000000 - 1;
     TIM2 -> DIER |= TIM_DIER_UIE;
     NVIC -> ISER[0] = 1<<TIM2_IRQn;
     TIM2 -> CR1 |= TIM_CR1_CEN;
@@ -45,31 +36,42 @@ void init_tim2(void) {
 void TIM2_IRQHandler()
 {
     TIM2 -> SR &= ~(1);
-    clock();
+    if(getMode() == 3){
+        clockDown();
+    }else{
+        clockUp();
+    }
 }
 
-void clock(void) {
-    static int tenths = 0;
+void clockUp(void) {
     static int seconds = 0;
     static int minutes = 0;
-    static int hours = 0;
-    tenths += 1;
-    if (tenths == 10) {
-        tenths = 0;
-        seconds += 1;
-    }
+    seconds += 1;
     if (seconds > 59) {
         seconds = 0;
         minutes += 1;
     }
-    if (minutes > 59) {
-        minutes = 0;
-        hours += 1;
-    }
-    display1_line1("Time:");
     char line[20];
-    sprintf(line, "%02d:%02d:%02d.%d", hours, minutes, seconds, tenths);
-    display1_line2(line);
+    sprintf(line, "Time: %02d:%02d", minutes, seconds);
+    display1_line1(line);
+}
+
+void clockDown(){
+    static int seconds = 0;
+    static int minutes = 5;
+    seconds -= 1;
+    if (seconds < 0) {
+        seconds = 59;
+        minutes -= 1;
+    }
+    char line[20];
+    sprintf(line, "Time: %02d:%02d", minutes, seconds);
+    display1_line1(line);
+    if(seconds <= 0 && minutes <= 0){ endTimer(); }
+}
+
+void endTimer(){
+    TIM2 -> CR1 &= ~(TIM_CR1_CEN);
 }
 
 void display1_line1(const char *s) {
