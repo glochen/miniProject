@@ -48,17 +48,17 @@ bool gameOver(){
     if (pegsRemaining == 1){
         return true;
     }
+    if(mode == 2 && seconds >= MAX_TIME){
+        return true;
+    }
     for(int s = 0; s < NUM_SLOTS; s++){
         // if any slot is a legal move, return false
         if(slots[s].state >= Legal){
             return false;
         }
     }
-    if(mode == 2 && seconds >= MAX_TIME){
-        return true;
-    }
-    // otherwise, game over
-    return false;
+    // otherwise (no legal moves), game over
+    return true;
 }
 
 bool jump(int dest){
@@ -234,4 +234,3 @@ void initSlots(){
     slots[14].neighbors[12] = 13;
     slots[14].neighbors[5] = 9;
 }
-

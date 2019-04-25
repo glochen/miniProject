@@ -74,8 +74,8 @@ void initJumps();
 void initBoard();
 
 MoveList moves(bool* b);
-void makemove(bool* b, Move m);
-void unmove(bool* b, Move m);
+bool* makemove(bool* b, Move m);
+bool* unmove(bool* b, Move m);
 int gameover(bool* b);
 MoveValue minimize(bool* b, MoveValue best, int k);
 MoveValue optimize(bool* b, int k);
