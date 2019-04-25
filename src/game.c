@@ -51,14 +51,18 @@ bool gameOver(){
     if(mode == 2 && seconds >= MAX_TIME){
         return true;
     }
-    for(int s = 0; s < NUM_SLOTS; s++){
-        // if any slot is a legal move, return false
-        if(slots[s].state >= Legal){
-            return false;
+    if(ActiveSlot >= 0){
+        for(int s = 0; s < NUM_SLOTS; s++){
+            // if any slot is a legal move, return false
+            if(slots[s].state >= Legal){
+                return false;
+            }
         }
+    }else{
+        // todo
     }
     // otherwise (no legal moves), game over
-    return true;
+    return false;
 }
 
 bool jump(int dest){
@@ -151,7 +155,6 @@ void startGame(){
     display2_line2("");
     endTimer15();
     setup_timer2();
-
     // todo different things based on mode
     while(!gameOver()){
         slot = getSlot();
