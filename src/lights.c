@@ -8,7 +8,7 @@ void setup_shift(){
 }
 
 void setLights(Slot * lights){
-    for(int i = 0; i < 15; i++){
+    for(int i = 14; i >= 0; i--){
         if(lights[i].color == 0){               // 1 1 (off)
             GPIOC -> ODR |= 1 << 2;     // send 1
             GPIOC -> ODR |= 1;

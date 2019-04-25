@@ -151,6 +151,7 @@ void startGame(){
     display2_line2("");
     endTimer15();
     setup_timer2();
+
     // todo different things based on mode
     while(!gameOver()){
         slot = getSlot();
