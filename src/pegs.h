@@ -33,7 +33,7 @@ void elevate(int slot); // changes a slot up to Legal if it is Open or Optimal
 
 void findOptimal(); // sets the optimal move for the current active
 
-bool pinSelect(int slot); // figures out what to do based on what pin is pushed
+bool slotSelect(int slot); // figures out what to do based on what pin is pushed
 
 // Move optimizer info
 
