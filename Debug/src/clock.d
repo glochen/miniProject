@@ -1,4 +1,4 @@
-src/slot.o: ../src/slot.c \
+src/clock.o: ../src/clock.c ../src/stm.h \
  C:/Users/gloch/workspace/miniProject/CMSIS/device/stm32f0xx.h \
  C:/Users/gloch/workspace/miniProject/CMSIS/core/core_cm0.h \
  C:/Users/gloch/workspace/miniProject/CMSIS/core/core_cmInstr.h \
@@ -27,6 +27,8 @@ src/slot.o: ../src/slot.c \
  C:/Users/gloch/workspace/miniProject/StdPeriph_Driver/inc/stm32f0xx_misc.h \
  C:/Users/gloch/workspace/miniProject/Utilities/stm32f0_discovery.h \
  ../src/pegs.h
+
+../src/stm.h:
 
 C:/Users/gloch/workspace/miniProject/CMSIS/device/stm32f0xx.h:
 

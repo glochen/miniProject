@@ -1,4 +1,4 @@
-src/LCD2.o: ../src/LCD2.c \
+src/lights.o: ../src/lights.c ../src/stm.h \
  C:/Users/gloch/workspace/miniProject/CMSIS/device/stm32f0xx.h \
  C:/Users/gloch/workspace/miniProject/CMSIS/core/core_cm0.h \
  C:/Users/gloch/workspace/miniProject/CMSIS/core/core_cmInstr.h \
@@ -25,7 +25,10 @@ src/LCD2.o: ../src/LCD2.c \
  C:/Users/gloch/workspace/miniProject/StdPeriph_Driver/inc/stm32f0xx_usart.h \
  C:/Users/gloch/workspace/miniProject/StdPeriph_Driver/inc/stm32f0xx_wwdg.h \
  C:/Users/gloch/workspace/miniProject/StdPeriph_Driver/inc/stm32f0xx_misc.h \
- C:/Users/gloch/workspace/miniProject/Utilities/stm32f0_discovery.h
+ C:/Users/gloch/workspace/miniProject/Utilities/stm32f0_discovery.h \
+ ../src/pegs.h
+
+../src/stm.h:
 
 C:/Users/gloch/workspace/miniProject/CMSIS/device/stm32f0xx.h:
 
@@ -80,3 +83,5 @@ C:/Users/gloch/workspace/miniProject/StdPeriph_Driver/inc/stm32f0xx_wwdg.h:
 C:/Users/gloch/workspace/miniProject/StdPeriph_Driver/inc/stm32f0xx_misc.h:
 
 C:/Users/gloch/workspace/miniProject/Utilities/stm32f0_discovery.h:
+
+../src/pegs.h:

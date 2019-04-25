@@ -1,6 +1,11 @@
 #include <stdbool.h>
-#define MAX_TIME 300
+#include <stdio.h>
+#include <stdint.h>
 #define NUM_SLOTS 15
+#define MAX_TIME 300
+
+int seconds;
+int mode;
 
 enum SlotState{Peg=0, Open=1, Legal=2, Optimal=3};
 enum SlotColor{Black=0, Red=1, Green=2, Yellow=3};

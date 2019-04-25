@@ -1,13 +1,4 @@
-#include "stm32f0xx.h"
-#include "stm32f0_discovery.h"
-#include <stdint.h>
-#include <stdio.h>
-
-void setup_adc();
-int read_adc_channel();
-void setup_timer15();
-
-int mode = -1;
+#include "stm.h"
 
 void setup_adc() {
     RCC -> APB2ENR |= RCC_APB2ENR_ADC1EN; // Enable clock to ADC unit

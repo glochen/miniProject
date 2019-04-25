@@ -1,7 +1,6 @@
-#include "pegs.h"
-#include <stdio.h>
+#include "stm.h"
 
-int pegsRemaining = NUM_SLOTS;
+int pegsRemaining = NUM_SLOTS - 1;
 
 int min(int x, int y){
     if (x < y){
@@ -25,14 +24,6 @@ void elevate(int slot){
 }
 
 void updateSlots(){
-    /*if(ActiveSlot < 0){
-        for(int i = 0; i < NUM_SLOTS; i++){
-            if(slots[i].state == Legal){
-                slots[i].state = Peg;
-            }
-        }
-        return;
-    }*/
     for(int i = 0; i < NUM_SLOTS; i++){
         // Check the neighbor status of each slot
 
@@ -63,7 +54,7 @@ bool gameOver(){
             return false;
         }
     }
-    if(getMode() == 3 && getTime() >= MAX_TIME){
+    if(mode == 2 && seconds >= MAX_TIME){
         return true;
     }
     // otherwise, game over
@@ -97,14 +88,15 @@ bool jump(int dest){
 bool slotSelect(int slot){
     // Check that the int passed is in the valid range
     if(slot < 0 || slot > NUM_SLOTS){
-        // todo print error message to lcd
+        display2_line2("No such peg");
         return false;
     }
     // if no active peg
     if(ActiveSlot < 0){
         // Check that there is a peg in that slot
         if(slots[slot].state != Peg){
-            // todo print error message to lcd (no peg in slot)
+            display2_line2("No peg");
+            ActiveSlot = -1;
             return false;
         }
         // select slot as active peg
@@ -112,6 +104,7 @@ bool slotSelect(int slot){
         char line[20];
         sprintf(line, "Selected peg: %d", slot + 1);
         display2_line1(line);
+        display2_line2("");
         // update color
         slots[slot].color = Green;
         setLights(slots);
@@ -123,6 +116,7 @@ bool slotSelect(int slot){
     else{
         if(slot == ActiveSlot){ // deselect spot
             display2_line1("Selected peg: ");
+            display2_line2("");
             slots[slot].color = Red;
             setLights(slots);
             ActiveSlot = -1;
@@ -131,7 +125,9 @@ bool slotSelect(int slot){
         }
         // check that the slot is a legal jump location
         if(slots[slot].state < Legal){
-            display2_line1("Invalid move");
+            char line[20];
+            sprintf(line, "Can't move to %d", slot + 1);
+            display2_line2(line);
             return false;
         }
         else{
@@ -139,47 +135,41 @@ bool slotSelect(int slot){
             char line[20];
             sprintf(line, "Moved to: %d", slot + 1);
             display2_line1(line);
+            display2_line2("");
             return true;
         }
     }
 }
 
-/* void startGame(...){
- * init_slots();
- * while(!gameOver){
- *      int p = getPin();
- *      slotSelect(p);
- *      display stuff
- *      make sure lights are updated
- * }
- * display whatever shows after game
- * implement showHighScore(mode)
- * display final game stuff
- * }
- *
- * change gameOver to check time remaining
- */
-
 void startGame(){
     initSlots();
     setLights(slots);
     display1_line1("Peg Game");
-    int slot = get_button_pressed();
-    while(slot == -1){
-        printLCD(1, 2, "         Press any button to start      ", 50);
-        slot = getSlot();
-    }
-    display1_line1("");
-    display1_line2("");
+    int slot = start();
+    display1_line2("Pegs left: 14");
     display2_line1("Selected peg: ");
     display2_line2("");
     endTimer15();
-    init_tim2();
-    int mode = getMode();
+    setup_timer2();
     // todo different things based on mode
     while(!gameOver()){
         slot = getSlot();
         slotSelect(slot);
+        char line[20];
+        sprintf(line, "Pegs Left: %d", pegsRemaining);
+        display1_line2(line);
+    }
+    endTimer2();
+    const char * msg = "         You need some help       ";
+    if(pegsRemaining == 1){ msg = "         You're a genius       "; }
+    else if(pegsRemaining == 2){ msg = "         You were close       "; }
+    else if(pegsRemaining == 3){ msg = "         You tried       "; }
+    int offset = 0;
+    while(1){
+            display1_line2(&msg[offset]);
+            nano_wait(100000000);
+            offset++;
+            if(offset >= 40){ offset = 0; }
     }
 }
 
