@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#define MAX_TIME 300
+
 //LCD using SPI1
 void spi1_cmd(char b);
 void spi1_data(char b);
@@ -12,6 +14,7 @@ void init_lcd1(void);
 void display1_line1(const char *);
 void display1_line2(const char *);
 
+int seconds = 0;
 uint16_t dispmem1[34] = {
         0x080 + 0,
         0x220, 0x220, 0x220, 0x220, 0x220, 0x220, 0x220, 0x220,
@@ -44,33 +47,29 @@ void TIM2_IRQHandler()
 }
 
 void clockUp(void) {
-    static int seconds = 0;
-    static int minutes = 0;
-    seconds += 1;
-    if (seconds > 59) {
-        seconds = 0;
-        minutes += 1;
-    }
+    int min = seconds / 60;
+    int sec = seconds % 60;
     char line[20];
-    sprintf(line, "Time: %02d:%02d", minutes, seconds);
+    sprintf(line, "Time: %02d:%02d", min, sec);
     display1_line1(line);
+    seconds += 1;
 }
 
 void clockDown(){
-    static int seconds = 0;
-    static int minutes = 5;
-    seconds -= 1;
-    if (seconds < 0) {
-        seconds = 59;
-        minutes -= 1;
-    }
+    int secLeft = MAX_TIME - seconds;
+    int min = secLeft / 60;
+    int sec = secLeft % 60;
     char line[20];
-    sprintf(line, "Time: %02d:%02d", minutes, seconds);
+    sprintf(line, "Time: %02d:%02d", min, sec);
     display1_line1(line);
-    if(seconds <= 0 && minutes <= 0){ endTimer(); }
+    if(secLeft <= 0){
+        endTimer2();
+        display1_line1("TIME IS UP");
+    }
+    seconds += 1;
 }
 
-void endTimer(){
+void endTimer2(){
     TIM2 -> CR1 &= ~(TIM_CR1_CEN);
 }
 
