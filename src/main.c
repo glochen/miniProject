@@ -21,15 +21,15 @@ int main(void)
     // lcd setup
     init_lcd1();
     init_lcd2();
-
-    // adc setup
+    // led setup
+    setup_shift();
+    // button setup
+    setup_button_matrix(); // set up push button matrix
+    setup_timer3(); // set up timer for button matrix
+    // set up adc
     setup_adc();
     setup_timer15();
-
-    testLEDs();
-    //testButtons();
-
-    init_tim2();
+    startGame();
 }
 
 void nano_wait(unsigned int n) {

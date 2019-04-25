@@ -2,6 +2,7 @@
 #include "stm32f0_discovery.h"
 #include <stdint.h>
 #include <stdio.h>
+#include "pegs.h"
 
 void testLEDs();
 void setup_timer3(void);
@@ -31,7 +32,7 @@ uint8_t key_released[5][3]  = { {0}, {0}, {0}, {0}, {0} };
 
 void testLEDs(){
     setup_shift();
-    int data[15] = {2,3,1,1,1,1,1,1,2,3,3,3,3,3,2};
+    int data[15] = {0,0,0,0,0,0,0,0,3,3,3,3,3,3,3};
     setLights(data);
 }
 
@@ -59,9 +60,9 @@ void setup_shift(){
     GPIOC -> MODER |= 1 << 2*2;
 }
 
-void setLights(int * lights){
+void setLights(Slot * lights){
     for(int i = 0; i < 15; i++){
-        if(lights[i] == 0){               // 1 1 (off)
+        if(lights[i].color == 0){               // 1 1 (off)
             GPIOC -> ODR |= 1 << 2;     // send 1
             GPIOC -> ODR |= 1;
             GPIOC -> ODR &= ~(1 << 1);
@@ -70,16 +71,7 @@ void setLights(int * lights){
             GPIOC -> ODR |= 1 << 1;
             nano_wait(200);
             GPIOC -> ODR |= 1 << 2;     // send 1
-        }else if(lights[i] == 1){         // 1 0 (green)
-            GPIOC -> ODR |= 1 << 2;     // send 1
-            GPIOC -> ODR |= 1;
-            GPIOC -> ODR &= ~(1 << 1);
-            nano_wait(200);
-            GPIOC -> ODR &= ~1;
-            GPIOC -> ODR |= 1 << 1;
-            nano_wait(200);
-            GPIOC -> ODR &= ~(1 << 2);  // send 0
-        }else if(lights[i] == 2){         // 0 1 (red)
+        }else if(lights[i].color == 1){         // 0 1 (red)
             GPIOC -> ODR &= ~(1 << 2);  // send 0
             GPIOC -> ODR |= 1;
             GPIOC -> ODR &= ~(1 << 1);
@@ -88,6 +80,15 @@ void setLights(int * lights){
             GPIOC -> ODR |= 1 << 1;
             nano_wait(200);
             GPIOC -> ODR |= 1 << 2;     // send 1
+        }else if(lights[i].color == 2){         // 1 0 (green)
+            GPIOC -> ODR |= 1 << 2;     // send 1
+            GPIOC -> ODR |= 1;
+            GPIOC -> ODR &= ~(1 << 1);
+            nano_wait(200);
+            GPIOC -> ODR &= ~1;
+            GPIOC -> ODR |= 1 << 1;
+            nano_wait(200);
+            GPIOC -> ODR &= ~(1 << 2);  // send 0
         }else{                          // 0 0 (yellow)
             GPIOC -> ODR &= ~(1 << 2);  // send 0
             GPIOC -> ODR |= 1;

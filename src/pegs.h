@@ -1,5 +1,5 @@
 #include <stdbool.h>
-
+#define MAX_TIME 300
 #define NUM_SLOTS 15
 
 enum SlotState{Peg=0, Open=1, Legal=2, Optimal=3};
@@ -13,9 +13,10 @@ typedef struct _Slot{
                             // that would be jumped over. If it is -1, that
                             // is not a valid jump.
     enum SlotState state;   // The state of the slot
+    enum SlotColor color;   // The color of the slot
 } Slot;
 
-Slot* slots;
+Slot slots[NUM_SLOTS];
 int ActiveSlot;
 int pegsRemaining;
 

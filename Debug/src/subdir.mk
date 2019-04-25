@@ -7,7 +7,10 @@ C_SRCS += \
 ../src/LCD1.c \
 ../src/LCD2.c \
 ../src/adc.c \
+../src/game.c \
 ../src/main.c \
+../src/optimize.c \
+../src/optimize_test.c \
 ../src/shiftRegister.c \
 ../src/slot.c \
 ../src/syscalls.c \
@@ -17,7 +20,10 @@ OBJS += \
 ./src/LCD1.o \
 ./src/LCD2.o \
 ./src/adc.o \
+./src/game.o \
 ./src/main.o \
+./src/optimize.o \
+./src/optimize_test.o \
 ./src/shiftRegister.o \
 ./src/slot.o \
 ./src/syscalls.o \
@@ -27,7 +33,10 @@ C_DEPS += \
 ./src/LCD1.d \
 ./src/LCD2.d \
 ./src/adc.d \
+./src/game.d \
 ./src/main.d \
+./src/optimize.d \
+./src/optimize_test.d \
 ./src/shiftRegister.d \
 ./src/slot.d \
 ./src/syscalls.d \

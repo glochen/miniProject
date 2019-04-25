@@ -2,8 +2,7 @@
 #include "stm32f0_discovery.h"
 #include <stdint.h>
 #include <stdio.h>
-
-#define MAX_TIME 300
+#include "pegs.h"
 
 //LCD using SPI1
 void spi1_cmd(char b);
@@ -39,7 +38,7 @@ void init_tim2(void) {
 void TIM2_IRQHandler()
 {
     TIM2 -> SR &= ~(1);
-    if(getMode() == 3){
+    if(getMode() == 2){
         clockDown();
     }else{
         clockUp();
@@ -67,6 +66,10 @@ void clockDown(){
         display1_line1("TIME IS UP");
     }
     seconds += 1;
+}
+
+int getTime(){
+    return seconds;
 }
 
 void endTimer2(){
