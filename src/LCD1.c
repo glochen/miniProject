@@ -62,7 +62,10 @@ void clockDown(){
     char line[20];
     sprintf(line, "Time: %02d:%02d", min, sec);
     display1_line1(line);
-    if(secLeft <= 0){ endTimer2(); }
+    if(secLeft <= 0){
+        endTimer2();
+        display1_line1("TIME IS UP");
+    }
     seconds += 1;
 }
 

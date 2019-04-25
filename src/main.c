@@ -30,18 +30,6 @@ int main(void)
     //testButtons();
 
     init_tim2();
-
-    // static tests
-    /*printLCD(1,1,"display1line1", 13);
-    printLCD(1,2,"display1line2", 13);
-    printLCD(2,1,"display2line1", 13);
-    printLCD(2,2,"display2line2", 13);*/
-
-    // scrolling tests
-    /*printLCD(1,1,"                 display1line1 scrolling                  ", 50);
-    printLCD(1,2,"                 display1line2 scrolling                  ", 50);
-    printLCD(2,1,"                 display2line1 scrolling                  ", 50);
-    printLCD(2,2,"                 display2line2 scrolling                  ", 50);*/
 }
 
 void nano_wait(unsigned int n) {
