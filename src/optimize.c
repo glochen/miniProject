@@ -3,6 +3,7 @@
 #include <string.h>
 #include "pegs.h"
 
+
 void initJumps(){
     for(int i = 0; i < 15; i++){
         for(int j = 0; j < 15; j++){
@@ -17,7 +18,7 @@ void initJumps(){
     jumps[2][7]  =(char) 4;
     jumps[2][9]  =(char) 5;
     jumps[3][0]  =(char) 1;
-    jumps[3][5]  =(char) 5;
+    jumps[3][5]  =(char) 4;
     jumps[3][12] =(char) 7;
     jumps[3][10] =(char) 6;
     jumps[4][11] =(char) 7;
@@ -114,17 +115,79 @@ MoveValue minimize(bool* b, MoveValue best, int k){
             best.value = score.value;
         }
         unmove(b, ms.moves[i]);
-        if (score.value == 1);
-            makemove(b, ms.moves[i]);
-            showboard(b)
-            unmove(b, ms.moves[i])
+        if (score.value == 1){
+            //printf("\n~~~~\n");
+            //printf("K = %d\n", k);
+            //makemove(b, ms.moves[i]);
+            //showboard(b);
+            //unmove(b, ms.moves[i]);
+            //printf("(%d, %d)\t%.2f\n", best.move.src, best.move.dest, best.value);
+            //printf("score.value: %.2f", score.value);
             return best;
+        }
     }
     return best;
 }
-MoveValue optimize(bool* b, int k);
-float lookahead(bool* b, int k);
-MoveValueList lookaheadoptions(bool* b, int k);
+
+MoveValue optimize(bool* b, int k){
+    Move bestMove = {.src=-1, .dest=-1};
+    MoveValue ret = {.move=bestMove, .value=99};
+    ret = minimize(b, ret, k);
+    return ret;
+}
+
+void doOpt(bool* b){
+    showboard(b);
+    MoveValue mv = optimize(b, 13);
+    printf("(%d, %d)\t%.2f\n", mv.move.src, mv.move.dest, mv.value);
+    makemove(b, mv.move);
+    showboard(b);
+    printf("~~~~~~~~\n");
+}
+
+float lookahead(bool* b, int k){
+    if (gameover(b)){
+        return (int) gameover(b) == 1;
+    }
+    else{
+        float total = 0;
+        MoveList ms = moves(b);
+        if (k == 0){
+            for (int i = 0; i < ms.numMoves; i++){
+                makemove(b, ms.moves[i]);
+                Move bestMove = {.src=-1, .dest=-1};
+                MoveValue value = {.move=bestMove, .value = 99};
+                value = minimize(b, value, 13);
+                unmove(b, ms.moves[i]);
+                total += (int) value.value==1;
+            }
+        }
+        else{
+            for (int i = 0; i < ms.numMoves; i++){
+                makemove(b, ms.moves[i]);
+                float moveValue = lookahead(b, k-1);
+                unmove(b, ms.moves[i]);
+                total += moveValue;
+            }
+        }
+        float avg = total/ms.numMoves;
+        return avg;
+    }
+}
+
+MoveValueList lookaheadoptions(bool* b, int k){
+    MoveList options = moves(b);
+    MoveValueList values;
+    values.numMoves = options.numMoves;
+    for(int i = 0; i < options.numMoves; i++){
+        makemove(b, options.moves[i]);
+        float val = lookahead(b, k-1);
+        values.moveValues[i].move = options.moves[i];
+        values.moveValues[i].value = val;
+        unmove(b, options.moves[i]);
+    }
+    return values;
+}
 
 void showboard(bool* b){
     printf("    %c\n", c(b[0]));
@@ -143,5 +206,12 @@ char c(bool peg){
     }
 }
 
-void doOpt(bool* b);
-void showlookahead(bool* b, int k);
+void showlookahead(bool* b, int k){
+    showboard(b);
+    MoveValueList values = lookaheadoptions(b, k);
+    for (int i = 0; i < values.numMoves; i++){
+        MoveValue cur = values.moveValues[i];
+        printf("(%d, %d)\t%.2f\n", cur.move.src, cur.move.dest, cur.value);
+    }
+    printf("~~~~~~~~~~~~~\n");
+}
