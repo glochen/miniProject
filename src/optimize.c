@@ -72,17 +72,19 @@ MoveList moves(bool* b){
     return ret;
 }
 
-void makemove(bool* b, Move m){
+bool* makemove(bool* b, Move m){
     char jumped = jumps[m.src][m.dest];
     b[(int)jumped] = false;
     b[m.src] = false;
     b[m.dest] = true;
+    return b;
 }
-void unmove(bool* b, Move m){
+bool* unmove(bool* b, Move m){
     char jumped = jumps[m.src][m.dest];
     b[(int)jumped] = true;
     b[m.src] = true;
     b[m.dest] = false;
+    return b;
 }
     
 int gameover(bool* b){
@@ -99,9 +101,27 @@ int gameover(bool* b){
     }
 }
 
-
-
-MoveValue minimize(bool* b, MoveValue best, int k);
+MoveValue minimize(bool* b, MoveValue best, int k){
+    if (gameover(b)){
+        MoveValue ret = {.move = {.src=63, .dest=63}, .value = gameover(board)};
+        return ret;
+    }
+    MoveList ms = moves(b);
+    for (int i = 0; i < ms.numMoves; i++){
+        MoveValue score = minimize(makemove(b, ms.moves[i]), best, k-1);
+        if (score.value < best.value){
+            best.move = ms.moves[i];
+            best.value = score.value;
+        }
+        unmove(b, ms.moves[i]);
+        if (score.value == 1);
+            makemove(b, ms.moves[i]);
+            showboard(b)
+            unmove(b, ms.moves[i])
+            return best;
+    }
+    return best;
+}
 MoveValue optimize(bool* b, int k);
 float lookahead(bool* b, int k);
 MoveValueList lookaheadoptions(bool* b, int k);
