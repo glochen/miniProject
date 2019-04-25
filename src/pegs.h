@@ -1,6 +1,11 @@
 #include <stdbool.h>
-
+#include <stdio.h>
+#include <stdint.h>
 #define NUM_SLOTS 15
+#define MAX_TIME 300
+
+int seconds;
+int mode;
 
 enum SlotState{Peg=0, Open=1, Legal=2, Optimal=3};
 enum SlotColor{Black=0, Red=1, Green=2, Yellow=3};
@@ -13,9 +18,10 @@ typedef struct _Slot{
                             // that would be jumped over. If it is -1, that
                             // is not a valid jump.
     enum SlotState state;   // The state of the slot
+    enum SlotColor color;   // The color of the slot
 } Slot;
 
-Slot* slots;
+Slot slots[NUM_SLOTS];
 int ActiveSlot;
 int pegsRemaining;
 
@@ -33,7 +39,7 @@ void elevate(int slot); // changes a slot up to Legal if it is Open or Optimal
 
 void findOptimal(); // sets the optimal move for the current active
 
-bool pinSelect(int slot); // figures out what to do based on what pin is pushed
+bool slotSelect(int slot); // figures out what to do based on what pin is pushed
 
 // Move optimizer info
 

@@ -4,32 +4,41 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/LCD1.c \
-../src/LCD2.c \
+../src/LCD.c \
 ../src/adc.c \
+../src/buttons.c \
+../src/clock.c \
+../src/game.c \
+../src/lights.c \
 ../src/main.c \
-../src/shiftRegister.c \
-../src/slot.c \
+../src/optimize.c \
+../src/optimize_test.c \
 ../src/syscalls.c \
 ../src/system_stm32f0xx.c 
 
 OBJS += \
-./src/LCD1.o \
-./src/LCD2.o \
+./src/LCD.o \
 ./src/adc.o \
+./src/buttons.o \
+./src/clock.o \
+./src/game.o \
+./src/lights.o \
 ./src/main.o \
-./src/shiftRegister.o \
-./src/slot.o \
+./src/optimize.o \
+./src/optimize_test.o \
 ./src/syscalls.o \
 ./src/system_stm32f0xx.o 
 
 C_DEPS += \
-./src/LCD1.d \
-./src/LCD2.d \
+./src/LCD.d \
 ./src/adc.d \
+./src/buttons.d \
+./src/clock.d \
+./src/game.d \
+./src/lights.d \
 ./src/main.d \
-./src/shiftRegister.d \
-./src/slot.d \
+./src/optimize.d \
+./src/optimize_test.d \
 ./src/syscalls.d \
 ./src/system_stm32f0xx.d 
 

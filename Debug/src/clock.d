@@ -1,4 +1,4 @@
-src/adc.o: ../src/adc.c ../src/stm.h \
+src/clock.o: ../src/clock.c ../src/stm.h \
  C:/Users/gloch/workspace/miniProject/CMSIS/device/stm32f0xx.h \
  C:/Users/gloch/workspace/miniProject/CMSIS/core/core_cm0.h \
  C:/Users/gloch/workspace/miniProject/CMSIS/core/core_cmInstr.h \

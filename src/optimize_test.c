@@ -2,7 +2,6 @@
 #include "stdbool.h"
 #include "pegs.h"
 
-
 int main(){
     printf("fuck\n");
 

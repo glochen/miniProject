@@ -1,13 +1,4 @@
-#include "stm32f0xx.h"
-#include "stm32f0_discovery.h"
-#include <stdint.h>
-#include <stdio.h>
-
-void setup_adc();
-int read_adc_channel();
-void setup_timer15();
-
-int mode = -1;
+#include "stm.h"
 
 void setup_adc() {
     RCC -> APB2ENR |= RCC_APB2ENR_ADC1EN; // Enable clock to ADC unit
@@ -35,15 +26,15 @@ void TIM15_IRQHandler() {
     TIM15 -> SR &= ~(1);
     int x = read_adc_channel();
     if(x < 1000){
-        mode = 1;
+        mode = 0;
         display2_line1("GAMEMODE: Easy");
         display2_line2("Hints Enabled");
     }else if(x < 3000){
-        mode = 2;
+        mode = 1;
         display2_line1("GAMEMODE: Normal");
         display2_line2("Hints Disabled");
     }else{
-        mode = 3;
+        mode = 2;
         display2_line1("GAMEMODE: Hard");
         display2_line2("5 Min Limit");
     }
