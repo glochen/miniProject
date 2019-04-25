@@ -31,7 +31,7 @@ uint8_t key_released[5][3]  = { {0}, {0}, {0}, {0}, {0} };
 
 void testLEDs(){
     setup_shift();
-    int data[15] = {0,0,1,1,1,1,1,1,2,3,3,3,3,3,3};
+    int data[15] = {2,3,1,1,1,1,1,1,2,3,3,3,3,3,2};
     setLights(data);
 }
 
@@ -41,7 +41,6 @@ void testButtons(){
 }
 
 int getSlot(){
-    init_lcd2();
     setup_button_matrix();
     setup_timer3();
     while(1){

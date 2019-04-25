@@ -62,3 +62,7 @@ void setup_timer15() {
     NVIC -> ISER[0] = 1<<TIM15_IRQn;
     TIM15 -> CR1 |= TIM_CR1_CEN;
 }
+
+void endTimer15(){
+    TIM15 -> CR1 &= ~(TIM_CR1_CEN);
+}
