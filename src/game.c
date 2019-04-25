@@ -160,16 +160,27 @@ void startGame(){
         display1_line2(line);
     }
     endTimer2();
-    const char * msg = "         You need some help       ";
-    if(pegsRemaining == 1){ msg = "         You're a genius       "; }
-    else if(pegsRemaining == 2){ msg = "         You were close       "; }
-    else if(pegsRemaining == 3){ msg = "         You tried       "; }
+    const char * msg1 = "               You need some help               ";
+    const char * msg2 = "              So many pegs left...               ";
+    if(pegsRemaining == 1){
+        msg1 = "                You're a genius               ";
+        msg2 = "            Highest score possible!            ";
+    }
+    else if(pegsRemaining == 2){
+        msg1 = "                    You were close             ";
+        msg2 = "           Almost the highest score possible       ";
+    }
+    else if(pegsRemaining == 3){
+        msg1 = "                 You tried               ";
+        msg2 = "             Better luck next time            ";
+    }
     int offset = 0;
     while(1){
-            display1_line2(&msg[offset]);
+            display2_line1(&msg1[offset]);
+            display2_line2(&msg2[offset]);
             nano_wait(100000000);
             offset++;
-            if(offset >= 40){ offset = 0; }
+            if(offset >= 50){ offset = 0; }
     }
 }
 
@@ -192,7 +203,7 @@ void initSlots(){
     slots[2].neighbors[7] = 4;
     slots[2].neighbors[9] = 5;
     slots[3].neighbors[0] = 1;
-    slots[3].neighbors[5] = 5;
+    slots[3].neighbors[5] = 4;
     slots[3].neighbors[12] = 7;
     slots[3].neighbors[10] = 6;
     slots[4].neighbors[11] = 7;

@@ -22,7 +22,7 @@ uint8_t key_released[5][3]  = { {0}, {0}, {0}, {0}, {0} };
 int getSlot(){
     setup_button_matrix();
     setup_timer3();
-    while(1){
+    while(!gameOver()){
         int slot = get_button_pressed();
         if(slot != -1){
             return slot;
