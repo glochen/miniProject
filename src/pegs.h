@@ -9,7 +9,7 @@ int mode;
 
 enum SlotState{Peg=0, Open=1, Legal=2, Optimal=3};
 enum SlotColor{Black=0, Red=1, Green=2, Yellow=3};
-enum GameMode{Hints=0,Regular=1,Timed=2};
+enum GameMode{Easy=0, Medium=1, Hard=2};
 
 typedef struct _Slot{
     int number;             // the ID of that slot
@@ -86,3 +86,8 @@ void showboard(bool* b);
 char c(bool peg);
 void doOpt(bool* b);
 void showlookahead(bool* b, int k);
+
+// Solver/Game interface
+
+bool* boardFromSlots(Slot* slots);
+bool legalMovesLeft();

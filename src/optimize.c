@@ -131,7 +131,15 @@ MoveValue minimize(bool* b, MoveValue best, int k){
 MoveValue optimize(bool* b, int k){
     Move bestMove = {.src=-1, .dest=-1};
     MoveValue ret = {.move=bestMove, .value=99};
-    ret = minimize(b, ret, k);
+    // ret = minimize(b, ret, k);
+    MoveValueList ms = lookaheadoptions(b, k);
+    for (int i=0; i < ms.numMoves; i++){
+        MoveValue cur = ms.moveValues[i];
+        if (cur.value > ret.value){
+            ret.move = cur.move;
+            ret.value = cur.value;
+        }
+    }
     return ret;
 }
 
@@ -213,4 +221,64 @@ void showlookahead(bool* b, int k){
         printf("(%d, %d)\t%.2f\n", cur.move.src, cur.move.dest, cur.value);
     }
     printf("~~~~~~~~~~~~~\n");
+}
+
+bool* boardFromSlots(Slots* slots){
+    for (int i = 0; i < NUM_SLOTS; i++){
+        board[i] = slots[i].state == Peg;
+    }
+    return board;
+}
+
+bool legalMovesLeft(){
+    boardFromSlots(slots);
+    MoveList ms = move(board);
+    return (ms.numMoves > 0);
+}
+
+void findOptimal(){
+    if (mode == Easy){
+        MoveValue optimal;
+        boardFromSlots(slots);
+        if (ActiveSlot == -1){
+            optimal = optimize(board, 13);
+        }
+
+        else{
+            Move m = {.src=-1, .dest=-1};
+            optimal = {.move=m, .value=99};
+            MoveValueList ms = lookaheadoptions(b, k);
+            
+            for (int i = 0; i < ms.numMoves; i++){
+                MoveValue cur = ms.moves[i];
+                // Only find best value from moves with currently selected source
+                if (cur.source == ActiveSlot && cur.value > optimal.value){
+                    optimal.move = cur.move;
+                    optimal.value = cur.value;
+                }
+            }
+        // If no move set (because no legal moves from selected pin, or total)
+        if (optimal.move.src == -1){
+            // Don't do anything
+            return;
+        }
+            
+        // Use `optimal.move.src` to access the source slot for the optimal move
+        // Figure out what you want to do with that one if no active slot selected
+
+        // Also, if we want to be cool, we could implement the hint only showing up after # seconds from the last slot select
+        // Would just have to have a global variable `TimeLastMove = seconds` during every slotSelect call and only call findOptimal() if `TimeLastMove > seconds + #`
+        //slots[optimal.move.dest].state = Optimal;
+        //slots[optimal.move.dest].color = Yellow;
+        //setColor() // Iunno the exact syntax for this attention GLORIA fix this pls
+        
+        // TODO figure out what to do with this
+        // Just set the optimal dest to yellow?
+        // Flash the color?
+        // Flash yellow for optimal src and dest?
+        // Disply hint on LCD?
+
+        // Also need to figure out what to do with updateSlots -
+        // make sure that the process for updating lights actually works
+    }
 }
