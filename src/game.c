@@ -25,6 +25,10 @@ void elevate(int slot){
 
 void updateSlots(){
     for(int i = 0; i < NUM_SLOTS; i++){
+        if (ActiveSlot == -1){
+            descend(i);
+            continue;
+        }
         // Check the neighbor status of each slot
 
         // if not a neighbor, descend to open
@@ -40,7 +44,7 @@ void updateSlots(){
             descend(i);
         }
     }
- //   findOptimal();
+    findOptimal();
 }
 
 bool gameOver(){
@@ -51,18 +55,8 @@ bool gameOver(){
     if(mode == 2 && seconds >= MAX_TIME){
         return true;
     }
-    if(ActiveSlot >= 0){
-        for(int s = 0; s < NUM_SLOTS; s++){
-            // if any slot is a legal move, return false
-            if(slots[s].state >= Legal){
-                return false;
-            }
-        }
-    }else{
-        // todo: call optimize
-    }
-    // otherwise (no legal moves), game over
-    return false;
+    if(legalMovesLeft()){ return false; }
+    return true;
 }
 
 bool jump(int dest){
@@ -148,10 +142,11 @@ bool slotSelect(int slot){
 
 void startGame(){
     initSlots();
+    initJumps();
     setLights(slots);
     display1_line1("Peg Game");
     int slot = start();
-    display1_line2("Pegs left: 14");
+    display1_line2("Pegs Left: 14");
     display2_line1("Selected peg: ");
     display2_line2("");
     endTimer15();
@@ -164,7 +159,7 @@ void startGame(){
         sprintf(line, "Pegs Left: %d", pegsRemaining);
         display1_line2(line);
     }
-    endTimer2();
+    if(seconds < MAX_TIME){ endTimer2(); }
     const char * msg1 = "               Just plain dumb               ";
     const char * msg2 = "              So many pegs left...               ";
     if(pegsRemaining == 1){
@@ -172,12 +167,12 @@ void startGame(){
         msg2 = "            Highest score possible!            ";
     }
     else if(pegsRemaining == 2){
-        msg1 = "                    You're pretty smart            ";
-        msg2 = "           So close to one peg          ";
+        msg1 = "           You're pretty smart            ";
+        msg2 = "           So close to one peg              ";
     }
     else if(pegsRemaining == 3){
         msg1 = "                You're just average              ";
-        msg2 = "             Try harder next time           ";
+        msg2 = "             Try harder next time                ";
     }
     int offset = 0;
     while(1){

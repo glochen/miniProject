@@ -62,6 +62,9 @@ MoveList moves(bool* b){
         if (!b[p]) continue;
         for(int n = 0; n < 15; n++){ // for all slots with no peg
             if (b[n]) continue;
+            int jpn = (int) jumps[p][n];
+            bool c1 = jumps[p][n] != 63;
+            bool c2 = b[jumps[p][n]];
             if (jumps[p][n] != 63 && b[jumps[p][n]]){
                 ret.moves[ret.numMoves].src = p;
                 ret.moves[ret.numMoves].dest= n;
@@ -102,6 +105,10 @@ int gameover(bool* b){
 }
 
 MoveValue minimize(bool* b, MoveValue best, int k){
+    if (k <= 0){
+        MoveValue ret = {.move = {.src=63, .dest=63}, .value = 1};
+        return ret;
+    }
     if (gameover(b)){
         MoveValue ret = {.move = {.src=63, .dest=63}, .value = gameover(board)};
         return ret;
@@ -129,7 +136,7 @@ MoveValue minimize(bool* b, MoveValue best, int k){
 }
 
 MoveValue optimize(bool* b, int k){
-    Move bestMove = {.src=-1, .dest=-1};
+    Move bestMove = {.src=63, .dest=63};
     MoveValue ret = {.move=bestMove, .value=99};
     // ret = minimize(b, ret, k);
     MoveValueList ms = lookaheadoptions(b, k);
@@ -146,7 +153,7 @@ MoveValue optimize(bool* b, int k){
 void doOpt(bool* b){
     showboard(b);
     MoveValue mv = optimize(b, 13);
-    printf("(%d, %d)\t%.2f\n", mv.move.src, mv.move.dest, mv.value);
+ //   printf("(%d, %d)\t%.2f\n", mv.move.src, mv.move.dest, mv.value);
     makemove(b, mv.move);
     showboard(b);
     printf("~~~~~~~~\n");
@@ -162,7 +169,7 @@ float lookahead(bool* b, int k){
         if (k == 0){
             for (int i = 0; i < ms.numMoves; i++){
                 makemove(b, ms.moves[i]);
-                Move bestMove = {.src=-1, .dest=-1};
+                Move bestMove = {.src=63, .dest=63};
                 MoveValue value = {.move=bestMove, .value = 99};
                 value = minimize(b, value, 13);
                 unmove(b, ms.moves[i]);
@@ -218,60 +225,86 @@ void showlookahead(bool* b, int k){
     MoveValueList values = lookaheadoptions(b, k);
     for (int i = 0; i < values.numMoves; i++){
         MoveValue cur = values.moveValues[i];
-        printf("(%d, %d)\t%.2f\n", cur.move.src, cur.move.dest, cur.value);
+ //       printf("(%d, %d)\t%.2f\n", cur.move.src, cur.move.dest, cur.value);
     }
-    printf("~~~~~~~~~~~~~\n");
+ //   printf("~~~~~~~~~~~~~\n");
 }
 
-bool* boardFromSlots(Slots* slots){
+bool* boardFromSlots(Slot * slots){
     for (int i = 0; i < NUM_SLOTS; i++){
         board[i] = slots[i].state == Peg;
+//        char line[20];
+//        sprintf(line, "Board %d : %d", i, board[i]);
+//        display1_line1(line);
+        //nano_wait(250000000);
     }
     return board;
 }
 
 bool legalMovesLeft(){
     boardFromSlots(slots);
-    MoveList ms = move(board);
+    MoveList ms = moves(board);
     return (ms.numMoves > 0);
 }
 
 void findOptimal(){
+    return;
+    char line[20];
+    display1_line2("Entered FO");
     if (mode == Easy){
         MoveValue optimal;
         boardFromSlots(slots);
+//        display1_line2("Board loaded");
         if (ActiveSlot == -1){
-            optimal = optimize(board, 13);
+            return;
         }
 
         else{
-            Move m = {.src=-1, .dest=-1};
-            optimal = {.move=m, .value=99};
-            MoveValueList ms = lookaheadoptions(b, k);
-            
+            Move m = {.src=63, .dest=63};
+            optimal.move=m;
+            optimal.value=99;
+   //         display1_line2("Beginning LA");
+            MoveValueList ms = lookaheadoptions(board, 1);
+ //           sprintf(line, "numMoves: %d", ms.numMoves);
+ //           display1_line1(line);
+ //           display1_line2("Finished LA");
             for (int i = 0; i < ms.numMoves; i++){
-                MoveValue cur = ms.moves[i];
+                MoveValue cur = ms.moveValues[i];
+ //               sprintf(line, "(%d, %d) %d", cur.move.src, cur.move.dest, (int) cur.value);
+ //               display2_line2(line);
                 // Only find best value from moves with currently selected source
-                if (cur.source == ActiveSlot && cur.value > optimal.value){
+                if (cur.move.src == ActiveSlot && cur.value > optimal.value){
                     optimal.move = cur.move;
                     optimal.value = cur.value;
                 }
             }
+ //           display1_line2("Found optimal");
+ //           sprintf(line, "op d: %d", optimal.move.dest);
+ //           display2_line2(line);
+        }
         // If no move set (because no legal moves from selected pin, or total)
-        if (optimal.move.src == -1){
+        if (optimal.move.src == 63){
             // Don't do anything
             return;
         }
-            
+//        sprintf(line, "op d: %d", optimal.move.dest);
+//        display2_line2(line);
+
         // Use `optimal.move.src` to access the source slot for the optimal move
         // Figure out what you want to do with that one if no active slot selected
 
         // Also, if we want to be cool, we could implement the hint only showing up after # seconds from the last slot select
         // Would just have to have a global variable `TimeLastMove = seconds` during every slotSelect call and only call findOptimal() if `TimeLastMove > seconds + #`
-        //slots[optimal.move.dest].state = Optimal;
-        //slots[optimal.move.dest].color = Yellow;
-        //setColor() // Iunno the exact syntax for this attention GLORIA fix this pls
-        
+//        display1_line2("Setting optimal");
+
+//        sprintf(line, "(%d, %d)", optimal.move.src, optimal.move.dest);
+//        display1_line2(line);
+        slots[optimal.move.dest].state = Optimal;
+//        display1_line2("State set");
+        slots[optimal.move.dest].color = Yellow;
+//        display1_line2("Beginning setlights");
+        setLights(slots); // Iunno the exact syntax for this attention GLORIA fix this pls
+//        display1_line2("Optimal set");
         // TODO figure out what to do with this
         // Just set the optimal dest to yellow?
         // Flash the color?

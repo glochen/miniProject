@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #define NUM_SLOTS 15
-#define MAX_TIME 300
+#define MAX_TIME 60
 
 int seconds;
 int mode;

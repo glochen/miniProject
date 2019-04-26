@@ -2,7 +2,7 @@
 #include "stdbool.h"
 #include "pegs.h"
 
-int main(){
+/*int test(){
     printf("fuck\n");
 
     initJumps();
@@ -62,4 +62,4 @@ int main(){
     showlookahead(board, 4);
 
     return 0;
-}
+}*/
