@@ -131,7 +131,15 @@ MoveValue minimize(bool* b, MoveValue best, int k){
 MoveValue optimize(bool* b, int k){
     Move bestMove = {.src=-1, .dest=-1};
     MoveValue ret = {.move=bestMove, .value=99};
-    ret = minimize(b, ret, k);
+    // ret = minimize(b, ret, k);
+    MoveValueList ms = lookaheadoptions(b, k);
+    for (int i=0; i < ms.numMoves; i++){
+        MoveValue cur = ms.moveValues[i];
+        if (cur.value > ret.value){
+            ret.move = cur.move;
+            ret.value = cur.value;
+        }
+    }
     return ret;
 }
 
@@ -213,4 +221,34 @@ void showlookahead(bool* b, int k){
         printf("(%d, %d)\t%.2f\n", cur.move.src, cur.move.dest, cur.value);
     }
     printf("~~~~~~~~~~~~~\n");
+}
+
+bool* boardFromSlots(Slots* slots){
+    for (int i = 0; i < NUM_SLOTS; i++){
+        board[i] = slots[i].state == Peg;
+    }
+    return board;
+}
+
+bool legalMovesLeft(){
+    boardFromSlots(slots);
+    MoveList ms = move(board);
+    return (ms.numMoves > 0);
+}
+
+void findOptimal(){
+    if (mode == Easy){
+        boardFromSlots(slots);
+        MoveValue optimal = optimize(board, 13);
+        //slots[optimal.dest =
+        
+        // TODO figure out what to do with this
+        // Just set the optimal dest to yellow?
+        // Flash the color?
+        // Flash yellow for optimal src and dest?
+        // Disply hint on LCD?
+
+        // Also need to figure out what to do with updateSlots -
+        // make sure that the process for updating lights actually works
+    }
 }
