@@ -13,6 +13,7 @@ int main(void)
     // set up adc
     setup_adc();
     setup_timer15();
+//    testLights();
     startGame();
 }
 

@@ -59,7 +59,7 @@ bool gameOver(){
             }
         }
     }else{
-        // todo
+        // todo: call optimize
     }
     // otherwise (no legal moves), game over
     return false;
@@ -76,12 +76,13 @@ bool jump(int dest){
         slots[ActiveSlot].color = Black;
         slots[dest].state = Peg;
         slots[dest].color = Red;
-        setLights(slots);
         // remove jumped peg
         slots[slots[ActiveSlot].neighbors[dest]].state = Open;
+        slots[slots[ActiveSlot].neighbors[dest]].color = Black;
         pegsRemaining -= 1;
         // clear active slot
         ActiveSlot = -1;
+        setLights(slots);
         return true;
     }
     else{
@@ -164,19 +165,19 @@ void startGame(){
         display1_line2(line);
     }
     endTimer2();
-    const char * msg1 = "               You need some help               ";
+    const char * msg1 = "               Just plain dumb               ";
     const char * msg2 = "              So many pegs left...               ";
     if(pegsRemaining == 1){
         msg1 = "                You're a genius               ";
         msg2 = "            Highest score possible!            ";
     }
     else if(pegsRemaining == 2){
-        msg1 = "                    You were close             ";
-        msg2 = "           Almost the highest score possible       ";
+        msg1 = "                    You're pretty smart            ";
+        msg2 = "           So close to one peg          ";
     }
     else if(pegsRemaining == 3){
-        msg1 = "                 You tried               ";
-        msg2 = "             Better luck next time            ";
+        msg1 = "                You're just average              ";
+        msg2 = "             Try harder next time           ";
     }
     int offset = 0;
     while(1){
